@@ -23,6 +23,9 @@ int main()
     char *cd = "/Usersss";
     changeDirectoryTo(cd);
 
+    cd = "/";
+    changeDirectoryTo(cd);
+
     currentWorkingDirectory = getWorkingDirectory();
 
     printf("%s\n", currentWorkingDirectory);
@@ -32,6 +35,8 @@ int main()
     for (int i = 0; i < sizeof(directoryContents); ++i) {
         printf("%s\n", directoryContents[i]->d_name);
     }
+
+    free(directoryContents);
 
     return 0;
 }
