@@ -30,7 +30,7 @@ void changeDirectoryTo(char * directoryPath) {
 //---------------------------------------------------
 //--------------------Example------------------------
 //---------------------------------------------------
-static int one (const struct dirent *unused) {
+int one (const struct dirent *unused) {
     return 1;
 }
 
@@ -52,36 +52,14 @@ void listDirectoryContents(char * directory) {
 //---------------------------------------------------
 //---------------------------------------------------
 
+struct dirent * * getDirectoryContents(char * directory) {
+    struct dirent * * directoryContents;
+    int size = scandir (directory, &directoryContents, one, alphasort);
 
-void getDirectoryContents(char * directory, char * directoryList[]) {
-    struct dirent **directoryContents;
-    int size;
-
-    size = scandir (directory, &directoryContents, one, alphasort);
     if (size >= 0) {
-        int i;
-        for (i = 0; i < size; ++i) {
-            // directoryList[i] = directoryContents[i]->d_name;
-            // puts(directoryList[i]);
-            char * directoryName = directoryContents[i]->d_name;
-            directoryList[i] = malloc(strlen(directoryName) + 1);
-            strcpy(directoryList[i], directoryName);
-        }
+        return directoryContents;
     } else {
         perror("Couldn't open the directory");
+        return NULL;
     }
-
-    // for (int i = 0; i < 5; ++i) {
-    //     directoryList[i] = malloc(strlen("foo") + 1);
-    //     strcpy(directoryList[i], "foo");
-    // }
 }
-
-// int* function(int tags){
-//   int * var = malloc(sizeof(int)*tags);
-//   //....
-//   return var;
-// }
-// strs[i] = malloc(strlen("foo") + 1);
-// strcpy(strs[i], "foo");
-

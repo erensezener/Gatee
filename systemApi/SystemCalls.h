@@ -17,6 +17,6 @@ void changeDirectoryTo(char *);
 
 void listDirectoryContents(char *);
 
-void getDirectoryContents(char *, char * []);
+struct dirent * *  getDirectoryContents(char *);
 
 #endif

@@ -27,12 +27,10 @@ int main()
 
     printf("%s\n", currentWorkingDirectory);
 
+    struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
 
-    char * directoryList[] = {};
-    getDirectoryContents(getWorkingDirectory(), directoryList);
-
-    for (int i = 0; i < 2; ++i) {
-        printf("%s\n", directoryList[i]);
+    for (int i = 0; i < sizeof(directoryContents); ++i) {
+        printf("%s\n", directoryContents[i]->d_name);
     }
 
     return 0;
