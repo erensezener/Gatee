@@ -55,23 +55,20 @@ int main() {
 }
 
 void initItems() {
+    changeDirectoryTo("/Users/aemreunal/Documents");
+
     struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
+    char * items[sizeof(directoryContents)];
 
-    char * * items;
-
-    for (int i = 0; i < sizeof(directoryContents); ++i)
-    {
-    //     printf("begin for\n");
-        items[i] = malloc(strlen((directoryContents[i]->d_name) + 1) * sizeof(char *));
-    //     printf("malloc'd\n");
-        // strcpy(items[i], directoryContents[i]->d_name);
-    //     printf("copied\n");
+    for (int i = 0; i < sizeof(directoryContents); ++i) {
+        items[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+        strcpy(items[i], directoryContents[i]->d_name);
     }
 
-    numListItems = ARRAY_SIZE(choices);
+    numListItems = ARRAY_SIZE(items);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
     for (int i = 0; i < numListItems; ++i) {
-        listItems[i] = new_item(choices[i], choices[i]);
+        listItems[i] = new_item(items[i], items[i]);
         /* Set the user pointer */
         set_item_userptr(listItems[i], printSelectedItemName);
     }
@@ -125,7 +122,7 @@ void enterKeyPressed() {
 }
 
 void printSelectedItemName(char *name) {
-    int lineNumberToPrintAt = 6;
+    int lineNumberToPrintAt = 26;
 
     move(lineNumberToPrintAt, 0);
     clrtoeol();
