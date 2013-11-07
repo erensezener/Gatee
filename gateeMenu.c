@@ -37,10 +37,9 @@ int main() {
             case KEY_UP:
                 upKeyPressed();
                 break;
-            case 10: /* Enter */{
+            case 10: /* Enter */
                 enterKeyPressed();
                 break;
-            }
             case KEY_LEFT:
                 leftKeyPressed();
                 break;
@@ -56,6 +55,19 @@ int main() {
 }
 
 void initItems() {
+    struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
+
+    char * * items;
+
+    for (int i = 0; i < sizeof(directoryContents); ++i)
+    {
+    //     printf("begin for\n");
+        items[i] = malloc(strlen((directoryContents[i]->d_name) + 1) * sizeof(char *));
+    //     printf("malloc'd\n");
+        // strcpy(items[i], directoryContents[i]->d_name);
+    //     printf("copied\n");
+    }
+
     numListItems = ARRAY_SIZE(choices);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
     for (int i = 0; i < numListItems; ++i) {
@@ -113,11 +125,28 @@ void enterKeyPressed() {
 }
 
 void printSelectedItemName(char *name) {
-    int lineNumberToPrintAt = 10;
+    int lineNumberToPrintAt = 6;
 
     move(lineNumberToPrintAt, 0);
     clrtoeol();
     mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
+
+    /* TEST */
+    lineNumberToPrintAt += 1;
+    changeDirectoryTo("/Users/aemreunal/Documents");
+    move(lineNumberToPrintAt, 0);
+    clrtoeol();
+    mvprintw(lineNumberToPrintAt, 0, "Current working directory is : %s", getWorkingDirectory());
+
+    lineNumberToPrintAt += 1;
+    struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
+
+    for (int i = 0; i < sizeof(directoryContents); ++i) {
+        move(lineNumberToPrintAt + i, 0);
+        clrtoeol();
+        mvprintw((lineNumberToPrintAt + i), 0, "%s", directoryContents[i]->d_name);
+    }
+    /* TEST */
 }
 
 void destructor() {
@@ -127,4 +156,10 @@ void destructor() {
     }
     free_menu(menu);
     endwin();
+}
+
+void println(char *string, int lineNumberToPrintAt) {
+    move(lineNumberToPrintAt, 0);
+    clrtoeol();
+    mvprintw(lineNumberToPrintAt, 0, "%s", string);
 }
