@@ -19,6 +19,7 @@ int main()
     char *currentWorkingDirectory = getWorkingDirectory();
 
     printf("%s\n", currentWorkingDirectory);
+	printf("End");
 
     char *cd = "/Usersss";
     changeDirectoryTo(cd);
@@ -32,7 +33,8 @@ int main()
 
     struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
 
-    for (int i = 0; i < sizeof(directoryContents); ++i) {
+	int i;
+    for (i = 0; i < sizeof(directoryContents); ++i) {
         printf("%s\n", directoryContents[i]->d_name);
     }
 

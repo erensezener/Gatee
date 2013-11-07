@@ -6,8 +6,8 @@ MENU *menu;
 int numListItems;
 
 int main() {
-	strcpy(choices[0],"Eren          ");
-	strcpy(choices[1],"Test          ");
+	strcpy(choices[0],"Eren");
+	strcpy(choices[1],"Test");
 	
     /* Initialize curses */
     initscr();
@@ -15,9 +15,6 @@ int main() {
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-    //init_pair(1, COLOR_RED, COLOR_BLACK);
-    //init_pair(2, COLOR_GREEN, COLOR_BLACK);
-    //init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
 
     /* Initialize items */
     initItems();
@@ -63,9 +60,9 @@ void initItems() {
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
 	int i;
     for (i = 0; i < numListItems; ++i) {
-        listItems[i] = new_item(choices[i], choices[i]);
+        listItems[i] = new_item(choices[i], "");
         /* Set the user pointer */
-        set_item_userptr(listItems[i], printSelectedItemName);
+        set_item_userptr(listItems[i], printCurrentDirectory);
     }
     listItems[numListItems] = (ITEM *)NULL;
 }
@@ -103,20 +100,10 @@ void enterKeyPressed() {
     p((char *)item_name(currentSelectedItem));
     pos_menu_cursor(menu);
 
-	strcpy(choices[0],"Changed          ");
-	strcpy(choices[2],"Changed          ");
-	strcpy(choices[3],"Changed          ");
-
-    //Change Menu Pointers
-    numListItems = ARRAY_SIZE(choices);
-    listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-	int i;
-    for(i = 0; i < numListItems; ++i) {
-        listItems[i] = new_item(choices[i], choices[i]);
-        /* Set the user pointer */
-        set_item_userptr(listItems[i], printSelectedItemName);
-    }
-    listItems[numListItems] = (ITEM *)NULL;
+	strcpy(choices[0],"Changed");
+	strcpy(choices[2],"Changed");
+	strcpy(choices[3],"Changed");
+	strcpy(choices[4],"Changed");
 
     set_menu_items(menu, listItems);
     initItems();
@@ -125,12 +112,22 @@ void enterKeyPressed() {
     refresh();
 }
 
+
+//Not in use
+//Prints the selected item
 void printSelectedItemName(char *name) {
     int lineNumberToPrintAt = 10;
-
     move(lineNumberToPrintAt, 0);
     clrtoeol();
-    //mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
+    mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
+}
+
+//Prints the current directory
+void printCurrentDirectory() {
+    int lineNumberToPrintAt = LINES - 5;
+    move(lineNumberToPrintAt, 0);
+    clrtoeol();
+    mvprintw(lineNumberToPrintAt, 0, "Your current directory is %s", getWorkingDirectory());
 }
 
 void destructor() {
