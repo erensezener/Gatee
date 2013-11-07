@@ -11,8 +11,8 @@ gatee: $(OBJECTS)
 gateeMenu.o: gateeMenu.c
 	$(CC) -c gateeMenu.c
 
-SystemCalls.o: SystemCalls.c SystemCalls.h
-	$(CC) -c SystemCalls.c
+SystemCalls.o: SystemAPI/SystemCalls.c SystemAPI/SystemCalls.h
+	$(CC) -c SystemAPI/SystemCalls.c $(INCLUDES)
 
 clean:
-	rm -f *.app *.o *.out
+	rm -f gatee *.o *.out
