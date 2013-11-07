@@ -63,3 +63,4 @@ struct dirent * * getDirectoryContents(char * directory) {
         return NULL;
     }
 }
+

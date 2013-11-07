@@ -1,5 +1,6 @@
 #include <curses.h>
 #include <menu.h>
+#include <stdlib.h>
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 	4
@@ -15,12 +16,12 @@ void func(char *name);
 
 int main()
 {	ITEM **my_items;
-	int c;				
+	int c;
 	MENU *my_menu;
     int n_choices, i;
 	ITEM *cur_item;
-	
-	/* Initialize curses */	
+
+	/* Initialize curses */
 	initscr();
 	start_color();
     cbreak();
@@ -70,14 +71,14 @@ int main()
 			case KEY_LEFT:
 				menu_driver(my_menu, REQ_BACK_PATTERN);
 				break;
-			case ' ':					
+			case ' ':
 				menu_driver(my_menu, REQ_NEXT_MATCH);
 				break;
 			default:
 				menu_driver(my_menu, c);
-				break;		
+				break;
 		}
-	}	
+	}
 	unpost_menu(my_menu);
 	for(i = 0; i < n_choices; ++i)
 		free_item(my_items[i]);
@@ -89,4 +90,4 @@ void func(char *name)
 {	move(20, 0);
 	clrtoeol();
 	mvprintw(20, 0, "Item selected is : %s", name);
-}	
+}
