@@ -6,6 +6,9 @@ MENU *menu;
 int numListItems;
 
 int main() {
+	strcpy(choices[0],"Eren          ");
+	strcpy(choices[1],"Test          ");
+	
     /* Initialize curses */
     initscr();
     start_color();
@@ -58,7 +61,8 @@ int main() {
 void initItems() {
     numListItems = ARRAY_SIZE(choices);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-    for (int i = 0; i < numListItems; ++i) {
+	int i;
+    for (i = 0; i < numListItems; ++i) {
         listItems[i] = new_item(choices[i], choices[i]);
         /* Set the user pointer */
         set_item_userptr(listItems[i], printSelectedItemName);
@@ -99,10 +103,15 @@ void enterKeyPressed() {
     p((char *)item_name(currentSelectedItem));
     pos_menu_cursor(menu);
 
+	strcpy(choices[0],"Changed          ");
+	strcpy(choices[2],"Changed          ");
+	strcpy(choices[3],"Changed          ");
+
     //Change Menu Pointers
     numListItems = ARRAY_SIZE(choices);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-    for(int i = 0; i < numListItems; ++i) {
+	int i;
+    for(i = 0; i < numListItems; ++i) {
         listItems[i] = new_item(choices[i], choices[i]);
         /* Set the user pointer */
         set_item_userptr(listItems[i], printSelectedItemName);
@@ -110,6 +119,10 @@ void enterKeyPressed() {
     listItems[numListItems] = (ITEM *)NULL;
 
     set_menu_items(menu, listItems);
+    initItems();
+    initMenu();
+    post_menu(menu);
+    refresh();
 }
 
 void printSelectedItemName(char *name) {
@@ -117,12 +130,13 @@ void printSelectedItemName(char *name) {
 
     move(lineNumberToPrintAt, 0);
     clrtoeol();
-    mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
+    //mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
 }
 
 void destructor() {
     unpost_menu(menu);
-    for(int i = 0; i < numListItems; ++i) {
+	int i;
+    for(i = 0; i < numListItems; ++i) {
         free_item(listItems[i]);
     }
     free_menu(menu);

@@ -5,13 +5,7 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 4
 
-char *choices[] = {
-    "Test",
-    "Deneme",
-    "Example",
-    "eren",
-    "Exit",
-};
+char choices[100][20];
 
 void enterKeyPressed();
 
