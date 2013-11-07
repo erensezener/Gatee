@@ -66,6 +66,30 @@ int main()
 				p = item_userptr(cur);
 				p((char *)item_name(cur));
 				pos_menu_cursor(my_menu);
+				
+				//Get Directory 
+				// *choices[] = {
+// 				    "Test",
+// 				    "Deneme",
+// 				    "Example",
+// 				    "eren",
+// 				    "Exit",
+// 					"Testt"
+// 				                  };
+				
+				//Change Menu Pointers
+		        n_choices = ARRAY_SIZE(choices);
+		        my_items = (ITEM **)calloc(n_choices + 1, sizeof(ITEM *));
+		   	 	for(i = 0; i < n_choices; ++i)
+		   	 	{       
+					my_items[i] = new_item(choices[i], choices[i]);
+		   			/* Set the user pointer */
+		   			set_item_userptr(my_items[i], func);
+		 	  	}
+		   	 	my_items[n_choices] = (ITEM *)NULL;
+					
+				
+				set_menu_items(my_menu, my_items);
 				break;
 			}
 			case KEY_LEFT:
