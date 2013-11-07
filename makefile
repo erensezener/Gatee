@@ -6,13 +6,14 @@ FLAGS=-lmenu -lncurses
 
 gatee: $(OBJECTS)
 	$(CC) -o $(OUTPUT) $(OBJECTS) $(FLAGS) $(INCLUDES)
+	rm -f *.o *.out *.gch
 	echo "Compiled & linked."
 
-gateeMenu.o: gateeMenu.c
-	$(CC) -c gateeMenu.c
+gateeMenu.o: gateeMenu.c gateeMenu.h
+	$(CC) -c gateeMenu.c gateeMenu.h
 
 SystemCalls.o: SystemAPI/SystemCalls.c SystemAPI/SystemCalls.h
 	$(CC) -c SystemAPI/SystemCalls.c $(INCLUDES)
 
 clean:
-	rm -f gatee *.o *.out
+	rm -f gatee *.o *.out *.gch
