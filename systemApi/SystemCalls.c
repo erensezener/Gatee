@@ -41,6 +41,14 @@ void changeDirectoryTo(char * directoryPath) {
 }
 
 /*
+ * NO USAGE.
+ */
+
+int one (const struct dirent *unused) {
+    return 1;
+}
+
+/*
  * Usage:
  *
  * int dirItemCount;
@@ -125,10 +133,14 @@ void logToFile(char * stringToLog) {
 
     FILE *file = fopen(LOG_FILE_NAME, "a+");
 
+    time_t rawTime;
+    time(&rawTime);
+    struct tm * currTime = localtime(&rawTime);
+
     if (file == NULL) {
         printf("Error opening file, unable to log!\n");
     } else {
-        fprintf(file, "%s\n", stringToLog);
+        fprintf(file, "%d/%d/%d %d:%d:%d - %s\n", currTime->tm_mday, (currTime->tm_mon + 1), (currTime->tm_year + 1900), currTime->tm_hour, currTime->tm_min, currTime->tm_sec, stringToLog);
         fclose(file);
     }
 

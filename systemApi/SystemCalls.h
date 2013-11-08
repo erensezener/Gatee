@@ -8,6 +8,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <string.h>
+#include <time.h>
 
 #define LOG_FILE_NAME "log.txt"
 #define READ R_OK
@@ -15,14 +16,6 @@
 #define EXECUTE X_OK
 
 int i;
-
-/*
- * NO USAGE.
- */
-
-int one (const struct dirent *unused) {
-    return 1;
-}
 
 char * getWorkingDirectory();
 

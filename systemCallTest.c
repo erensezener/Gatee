@@ -40,10 +40,12 @@ int main()
     }
 
     changeDirectoryTo("/Users/aemreunal/Documents/GitHub Repositories/Gatee");
-    logToFileAtRoot("hop");
+    logToFile("Deneme 123");
 
-    printf("%d\n", canRead("/log.txt"));
-    printf("%d\n", canWriteTo("/log.txt"));
+    // logToFileAtRoot("hop");
+
+    // printf("%d\n", canRead("/log.txt"));
+    // printf("%d\n", canWriteTo("/log.txt"));
 
     return 0;
 }
