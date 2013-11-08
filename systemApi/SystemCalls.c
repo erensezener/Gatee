@@ -1,8 +1,22 @@
 #include "SystemCalls.h"
 
+/*
+ * Usage:
+ *
+ * char *currentWorkingDirectory = getWorkingDirectory();
+ *
+ * printf("%s\n", currentWorkingDirectory);
+ */
+
 char * getWorkingDirectory() {
     return getcwd(NULL, 0);
 }
+
+/*
+ * Usage:
+ *
+ * changeDirectoryTo("/Users/aemreunal/Documents");
+ */
 
 void changeDirectoryTo(char * directoryPath) {
     int status = chdir(directoryPath);
@@ -53,6 +67,17 @@ void listDirectoryContents(char * directory) {
 //---------------------------------------------------
 //---------------------------------------------------
 
+/*
+ * Usage:
+ *
+ * int dirItemCount;
+ * struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory(), &dirItemCount);
+ *
+ * for (int i = 0; i < dirItemCount; ++i) {
+ *     printf("%s\n", directoryContents[i]->d_name);
+ * }
+ */
+
 struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
     struct dirent * * directoryContents;
     *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
@@ -66,19 +91,29 @@ struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
     }
 }
 
-char * * getDirectoryContentNames(char * directory, int * dirItemCount) {
+/*
+ * Usage:
+ *
+ * int dirItemCount;
+ * char * * dirContents;
+ * getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
+ *
+ * for (int i = 0; i < dirItemCount; ++i) {
+ *     printf("%s\n", dirContents[i]);
+ * }
+ */
+
+void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * dirContentNames) {
     struct dirent * * directoryContents;
     *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
 
     if (*dirItemCount >= 0) {
-        char * items[*dirItemCount];
+        *dirContentNames = malloc((int)dirItemCount * sizeof(char * *));
         for (int i = 0; i < *dirItemCount; ++i) {
-            items[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
-            strcpy(items[i], directoryContents[i]->d_name);
+            (*dirContentNames)[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+            strcpy((*dirContentNames)[i], directoryContents[i]->d_name);
         }
-        return items;
     } else {
         perror("Couldn't open the directory");
-        return (NULL);
     }
 }

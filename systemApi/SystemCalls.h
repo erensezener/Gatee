@@ -16,6 +16,6 @@ void listDirectoryContents(char * directory);
 
 struct dirent * *  getDirectoryContents(char * directory, int * dirItemCount);
 
-char * * getDirectoryContentNames(char * directory, int * dirItemCount);
+void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * dirContentNames);
 
 #endif

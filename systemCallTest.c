@@ -40,11 +40,14 @@ int main()
 
     // listDirectoryContents(currentWorkingDirectory);
 
-    int dirItemCount = 0;
-    char * * dirContents = getDirectoryContentNames(currentWorkingDirectory, &dirItemCount);
+    int dirItemCount;
+    char * * dirContents;
+    getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
+
+    printf("Number of items in the directory: %d\n", dirItemCount);
 
     for (int i = 0; i < dirItemCount; ++i) {
-        printf("%s\n", &(dirContents[i]));
+        printf("%s\n", dirContents[i]);
     }
 
     return 0;

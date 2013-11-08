@@ -3,4 +3,12 @@
 
 *.app
 
+*.o
+
+SystemAPI/*.o
+
+*.gch
+
 makefile~
+
+*.o
