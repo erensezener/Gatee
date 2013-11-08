@@ -40,32 +40,6 @@ void changeDirectoryTo(char * directoryPath) {
     }
 }
 
-//---------------------------------------------------
-//--------------------Example------------------------
-//---------------------------------------------------
-int one (const struct dirent *unused) {
-    return 1;
-}
-
-void listDirectoryContents(char * directory) {
-    struct dirent * * directoryContents;
-    int size;
-
-    size = scandir (directory, &directoryContents, one, alphasort);
-
-    if (size >= 0) {
-        int i;
-        for (i = 0; i < size; ++i) {
-            puts(directoryContents[i]->d_name);
-        }
-    } else {
-        perror("Couldn't open the directory");
-    }
-}
-//---------------------------------------------------
-//---------------------------------------------------
-//---------------------------------------------------
-
 /*
  * Usage:
  *
@@ -134,12 +108,18 @@ void logToFile(char * stringToLog) {
     // FILE *stream;
 
     // stream = open_memstream (&bp, &size);
+
     // fprintf (stream, "hello");
     // fflush (stream);
+
     // printf ("buf = `%s', size = %d\n", bp, size);
+
     // fprintf (stream, ", world");
+    // fflush (stream);
     // fclose (stream);
+
     // printf ("buf = `%s', size = %d\n", bp, size);
+
     // free(stream);
     // ----------IMPORTANT, DON'T DELETE-----------
 

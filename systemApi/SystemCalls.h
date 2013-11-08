@@ -16,6 +16,14 @@
 
 int i;
 
+/*
+ * NO USAGE.
+ */
+
+int one (const struct dirent *unused) {
+    return 1;
+}
+
 char * getWorkingDirectory();
 
 void changeDirectoryTo(char * directory);
