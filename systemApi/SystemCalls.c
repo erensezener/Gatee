@@ -35,10 +35,11 @@ int one (const struct dirent *unused) {
 }
 
 void listDirectoryContents(char * directory) {
-    struct dirent **directoryContents;
+    struct dirent * * directoryContents;
     int size;
 
     size = scandir (directory, &directoryContents, one, alphasort);
+
     if (size >= 0) {
         int i;
         for (i = 0; i < size; ++i) {
@@ -52,11 +53,12 @@ void listDirectoryContents(char * directory) {
 //---------------------------------------------------
 //---------------------------------------------------
 
-struct dirent * * getDirectoryContents(char * directory) {
+struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
     struct dirent * * directoryContents;
-    int size = scandir (directory, &directoryContents, one, alphasort);
+    *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
+    printf("%d\n", *dirItemCount);
 
-    if (size >= 0) {
+    if (*dirItemCount >= 0) {
         return directoryContents;
     } else {
         perror("Couldn't open the directory");
@@ -64,3 +66,19 @@ struct dirent * * getDirectoryContents(char * directory) {
     }
 }
 
+char * * getDirectoryContentNames(char * directory, int * dirItemCount) {
+    struct dirent * * directoryContents;
+    *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
+
+    if (*dirItemCount >= 0) {
+        char * items[*dirItemCount];
+        for (int i = 0; i < *dirItemCount; ++i) {
+            items[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+            strcpy(items[i], directoryContents[i]->d_name);
+        }
+        return items;
+    } else {
+        perror("Couldn't open the directory");
+        return (NULL);
+    }
+}

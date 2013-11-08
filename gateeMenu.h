@@ -1,3 +1,6 @@
+#ifndef GATEEMENU_H
+#define GATEEMENU_H
+
 #include <curses.h>
 #include <menu.h>
 #include <stdlib.h>
@@ -35,3 +38,5 @@ void printSelectedItemName(char *name);
 void println(char *string, int lineNumberToPrintAt);
 
 void destructor();
+
+#endif

@@ -57,13 +57,15 @@ int main() {
 void initItems() {
     changeDirectoryTo("/Users/aemreunal/Documents");
 
-    struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
-    char * items[sizeof(directoryContents)];
+    // struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
+    // char * items[sizeof(directoryContents)];
 
-    for (int i = 0; i < sizeof(directoryContents); ++i) {
-        items[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
-        strcpy(items[i], directoryContents[i]->d_name);
-    }
+    // for (int i = 0; i < sizeof(directoryContents); ++i) {
+    //     items[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+    //     strcpy(items[i], directoryContents[i]->d_name);
+    // }
+
+    char * items = getDirectoryContentNames(getWorkingDirectory());
 
     numListItems = ARRAY_SIZE(items);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));

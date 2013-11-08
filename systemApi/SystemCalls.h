@@ -3,9 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// #include </usr/include/sys/syscall.h>
-// #include <sys/types.h>
-// #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 #include <dirent.h>
@@ -13,10 +10,12 @@
 
 char * getWorkingDirectory();
 
-void changeDirectoryTo(char *);
+void changeDirectoryTo(char * directory);
 
-void listDirectoryContents(char *);
+void listDirectoryContents(char * directory);
 
-struct dirent * *  getDirectoryContents(char *);
+struct dirent * *  getDirectoryContents(char * directory, int * dirItemCount);
+
+char * * getDirectoryContentNames(char * directory, int * dirItemCount);
 
 #endif

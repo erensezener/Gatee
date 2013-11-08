@@ -23,20 +23,29 @@ int main()
     char *cd = "/Usersss";
     changeDirectoryTo(cd);
 
-    cd = "/";
+    cd = "/Users/aemreunal/Documents";
     changeDirectoryTo(cd);
 
     currentWorkingDirectory = getWorkingDirectory();
 
     printf("%s\n", currentWorkingDirectory);
 
-    struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
+    // int dirItemCount = 0;
+    // struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory(), &dirItemCount);
 
-    for (int i = 0; i < sizeof(directoryContents); ++i) {
-        printf("%s\n", directoryContents[i]->d_name);
+    // for (int i = 0; i < dirItemCount; ++i) {
+    //     printf("%s\n", directoryContents[i]->d_name);
+    // }
+    // printf("%d\n", dirItemCount);
+
+    // listDirectoryContents(currentWorkingDirectory);
+
+    int dirItemCount = 0;
+    char * * dirContents = getDirectoryContentNames(currentWorkingDirectory, &dirItemCount);
+
+    for (int i = 0; i < dirItemCount; ++i) {
+        printf("%s\n", &(dirContents[i]));
     }
-
-    free(directoryContents);
 
     return 0;
 }
