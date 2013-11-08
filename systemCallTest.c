@@ -19,6 +19,7 @@ int main()
     char *currentWorkingDirectory = getWorkingDirectory();
 
     printf("%s\n", currentWorkingDirectory);
+	printf("End");
 
     char *cd = "/Usersss";
     changeDirectoryTo(cd);
@@ -30,13 +31,27 @@ int main()
 
     printf("%s\n", currentWorkingDirectory);
 
+<<<<<<< HEAD
+=======
+    // int dirItemCount = 0;
+    // struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory(), &dirItemCount);
+
+    // for (int i = 0; i < dirItemCount; ++i) {
+    //     printf("%s\n", directoryContents[i]->d_name);
+    // }
+    // printf("%d\n", dirItemCount);
+
+    // listDirectoryContents(currentWorkingDirectory);
+
+
+>>>>>>> e67966fd7f29baf019afe69021c0cfd05e0b1d02
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
 
     printf("Number of items in the directory: %d\n", dirItemCount);
-
-    for (int i = 0; i < dirItemCount; ++i) {
+	int i;
+    for (i = 0; i < dirItemCount; ++i) {
         printf("%s\n", dirContents[i]);
     }
 
