@@ -15,7 +15,7 @@ char * getWorkingDirectory() {
 /*
  * Usage:
  *
- * changeDirectoryTo("/Users/aemreunal/Documents");
+ * changeDirectoryTo("/Users/--something--/Documents");
  */
 
 void changeDirectoryTo(char * directoryPath) {

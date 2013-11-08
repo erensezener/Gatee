@@ -30,16 +30,6 @@ int main()
 
     printf("%s\n", currentWorkingDirectory);
 
-    // int dirItemCount = 0;
-    // struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory(), &dirItemCount);
-
-    // for (int i = 0; i < dirItemCount; ++i) {
-    //     printf("%s\n", directoryContents[i]->d_name);
-    // }
-    // printf("%d\n", dirItemCount);
-
-    // listDirectoryContents(currentWorkingDirectory);
-
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
