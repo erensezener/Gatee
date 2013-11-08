@@ -8,6 +8,8 @@
 #include <dirent.h>
 #include <string.h>
 
+int i;
+
 char * getWorkingDirectory();
 
 void changeDirectoryTo(char * directory);

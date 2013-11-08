@@ -6,11 +6,10 @@
 #include <stdlib.h>
 #include "SystemAPI/SystemCalls.h"
 
-
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 4
 
-char choices[100][20];
+int i;
 
 void enterKeyPressed();
 
@@ -30,15 +29,10 @@ void initMenu();
 
 void printSelectedItemName(char *name);
 
-<<<<<<< HEAD
 void println(char *string, int lineNumberToPrintAt);
 
 void destructor();
 
-#endif
-=======
 void printCurrentDirectory();
 
-void destructor();
-
->>>>>>> MenuRefresh
+#endif

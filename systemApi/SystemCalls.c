@@ -109,7 +109,6 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
 
     if (*dirItemCount >= 0) {
         *dirContentNames = malloc((int)dirItemCount * sizeof(char * *));
-        int i;
 		for (i = 0; i < *dirItemCount; ++i) {
             (*dirContentNames)[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
             strcpy((*dirContentNames)[i], directoryContents[i]->d_name);
