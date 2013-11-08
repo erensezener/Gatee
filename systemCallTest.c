@@ -19,6 +19,7 @@ int main()
     char *currentWorkingDirectory = getWorkingDirectory();
 
     printf("%s\n", currentWorkingDirectory);
+	printf("End");
 
     char *cd = "/Usersss";
     changeDirectoryTo(cd);
@@ -39,6 +40,7 @@ int main()
     // printf("%d\n", dirItemCount);
 
     // listDirectoryContents(currentWorkingDirectory);
+
 
     int dirItemCount;
     char * * dirContents;

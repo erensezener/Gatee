@@ -12,5 +12,6 @@ SystemAPI/*.o
 makefile~
 
 *.o
+gatee
 
 test

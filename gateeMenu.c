@@ -6,15 +6,15 @@ MENU *menu;
 int numListItems;
 
 int main() {
+	strcpy(choices[0],"Eren");
+	strcpy(choices[1],"Test");
+	
     /* Initialize curses */
     initscr();
     start_color();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-    //init_pair(1, COLOR_RED, COLOR_BLACK);
-    //init_pair(2, COLOR_GREEN, COLOR_BLACK);
-    //init_pair(3, COLOR_MAGENTA, COLOR_BLACK);
 
     /* Initialize items */
     initItems();
@@ -69,11 +69,11 @@ void initItems() {
 
     numListItems = ARRAY_SIZE(items);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-    int i;
-	for (i = 0; i < numListItems; ++i) {
-        listItems[i] = new_item(items[i], items[i]);
+	int i;
+    for (i = 0; i < numListItems; ++i) {
+        listItems[i] = new_item(choices[i], "");
         /* Set the user pointer */
-        set_item_userptr(listItems[i], printSelectedItemName);
+        set_item_userptr(listItems[i], printCurrentDirectory);
     }
     listItems[numListItems] = (ITEM *)NULL;
 }
@@ -122,12 +122,19 @@ void enterKeyPressed() {
     }
     listItems[numListItems] = (ITEM *)NULL;
 
+
     set_menu_items(menu, listItems);
+    initItems();
+    initMenu();
+    post_menu(menu);
+    refresh();
 }
 
+
+//Not in use
+//Prints the selected item
 void printSelectedItemName(char *name) {
     int lineNumberToPrintAt = 26;
-
     move(lineNumberToPrintAt, 0);
     clrtoeol();
     mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
@@ -150,10 +157,19 @@ void printSelectedItemName(char *name) {
     /* TEST */
 }
 
+//Prints the current directory
+void printCurrentDirectory() {
+    int lineNumberToPrintAt = LINES - 5;
+    move(lineNumberToPrintAt, 0);
+    clrtoeol();
+    mvprintw(lineNumberToPrintAt, 0, "Your current directory is %s", getWorkingDirectory());
+}
+
 void destructor() {
     unpost_menu(menu);
     int i;
 	for(i = 0; i < numListItems; ++i) {
+
         free_item(listItems[i]);
     }
     free_menu(menu);
