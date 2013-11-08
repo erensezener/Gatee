@@ -69,7 +69,8 @@ void initItems() {
 
     numListItems = ARRAY_SIZE(items);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-    for (int i = 0; i < numListItems; ++i) {
+    int i;
+	for (i = 0; i < numListItems; ++i) {
         listItems[i] = new_item(items[i], items[i]);
         /* Set the user pointer */
         set_item_userptr(listItems[i], printSelectedItemName);
@@ -113,7 +114,8 @@ void enterKeyPressed() {
     //Change Menu Pointers
     numListItems = ARRAY_SIZE(choices);
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-    for(int i = 0; i < numListItems; ++i) {
+    int i;
+	for(i = 0; i < numListItems; ++i) {
         listItems[i] = new_item(choices[i], choices[i]);
         /* Set the user pointer */
         set_item_userptr(listItems[i], printSelectedItemName);
@@ -139,8 +141,8 @@ void printSelectedItemName(char *name) {
 
     lineNumberToPrintAt += 1;
     struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory());
-
-    for (int i = 0; i < sizeof(directoryContents); ++i) {
+	int i;
+    for (i = 0; i < sizeof(directoryContents); ++i) {
         move(lineNumberToPrintAt + i, 0);
         clrtoeol();
         mvprintw((lineNumberToPrintAt + i), 0, "%s", directoryContents[i]->d_name);
@@ -150,7 +152,8 @@ void printSelectedItemName(char *name) {
 
 void destructor() {
     unpost_menu(menu);
-    for(int i = 0; i < numListItems; ++i) {
+    int i;
+	for(i = 0; i < numListItems; ++i) {
         free_item(listItems[i]);
     }
     free_menu(menu);
