@@ -15,7 +15,9 @@ int main() {
     keypad(stdscr, TRUE);
 
     /* Initialize items */
-    initItems();
+    initItems("");
+    // initItems();
+	
 
     /* Create menu */
     initMenu();
@@ -44,6 +46,9 @@ int main() {
             case ' ':
                 spaceKeyPressed();
                 break;
+			// case KEY_DC:
+			// 	backspaceKeyPressed();
+			// 	break;
             default:
                 keyPressed(inputChar);
                 break;
@@ -52,9 +57,27 @@ int main() {
     destructor();
 }
 
-void initItems() {
-    changeDirectoryTo("/Users/aemreunal/Documents");
-
+void initItems(const char *folderName) {
+// void initItems() {
+	// char *folderName = "";
+	char *baseDir = "/Users/erensezener/Documents";
+	if (strcmp(folderName, "") == 0)
+    	changeDirectoryTo(baseDir);
+	else{
+		char *newFolderName ;
+// 		
+// 		if((newFolderName = malloc(strlen(baseDir)+strlen(folderName)+1)) != NULL){
+// 		    newFolderName[0] = '\0';   // ensures the memory is an empty string
+// 		    strcat(baseDir,folderName);
+// 		    strcat(baseDir,folderName);
+		strcpy(newFolderName, baseDir);
+		strcat(newFolderName, "/");
+		strcat(newFolderName, folderName);
+		changeDirectoryTo(newFolderName);
+		
+		//} 
+		
+	}
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
@@ -106,20 +129,32 @@ void enterKeyPressed() {
     pos_menu_cursor(menu);
 
     // set_menu_items(menu, listItems);
-    // initItems();
-    // initMenu();
-    // post_menu(menu);
-    // refresh();
+    initItems("");
+    initMenu();
+    post_menu(menu);
+    refresh();
 }
+
+//Duplicate of leftKeyPressed
+// void backspaceKeyPressed() { 
+//     menu_driver(menu, REQ_BACK_PATTERN);
+// }
 
 
 //Not in use
 //Prints the selected item
-void printSelectedItemName(char *name) {
+void printSelectedItemName(const char *name) {
     int lineNumberToPrintAt = 26;
     move(lineNumberToPrintAt, 0);
     clrtoeol();
     mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
+	
+	// initItems();
+    initItems(name);
+    initMenu();
+    post_menu(menu);
+    refresh();
+	
 
     /* TEST */
     // lineNumberToPrintAt += 1;

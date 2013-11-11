@@ -23,11 +23,12 @@ void spaceKeyPressed();
 
 void keyPressed(int inputChar);
 
-void initItems();
+void initItems(const char *folderName);
+// void initItems();
 
 void initMenu();
 
-void printSelectedItemName(char *name);
+void printSelectedItemName(const char *name);
 
 void println(char *string, int lineNumberToPrintAt);
 
