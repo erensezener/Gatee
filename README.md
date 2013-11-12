@@ -1,3 +1,10 @@
-Compilation:
+Gatee
+========================
 
-gcc -o gateeMenu.app gateeMenu.c -lmenu -lncurses
+Compilation commands:
+
+make gatee
+
+make test
+
+make clean

@@ -1,5 +1,3 @@
-#include <unistd.h>
-#include <fcntl.h>
 #include "SystemAPI/SystemCalls.h"
 
 int main()
@@ -40,6 +38,14 @@ int main()
     for (i = 0; i < dirItemCount; ++i) {
         printf("%s\n", dirContents[i]);
     }
+
+    changeDirectoryTo("/Users/aemreunal/Documents/GitHub Repositories/Gatee");
+    logToFile("Deneme 123");
+
+    // logToFileAtRoot("hop");
+
+    // printf("%d\n", canRead("/log.txt"));
+    // printf("%d\n", canWriteTo("/log.txt"));
 
     return 0;
 }
