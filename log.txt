@@ -426,3 +426,120 @@
 14/11/2013 12:20:37 - Folder Name Case
 14/11/2013 12:20:37 - Folder Name is: 
 14/11/2013 12:20:37 - /Users/erensezener/Documents/Anki/addons
+14/11/2013 12:23:26 - ---------
+14/11/2013 12:23:26 - BaseDir is: 
+14/11/2013 12:23:26 - /Users/erensezener/Documents
+14/11/2013 12:23:26 - Empty Folder Name Case
+14/11/2013 12:23:30 - BaseDir is: 
+14/11/2013 12:23:30 - /Users/erensezener/Documents
+14/11/2013 12:23:30 - Folder Name Case
+14/11/2013 12:23:30 - Folder Name is: 
+14/11/2013 12:23:30 - /Users/erensezener/Documents/MATLAB
+14/11/2013 12:23:34 - BaseDir is: 
+14/11/2013 12:23:34 - /Users/erensezener/Documents/MATLAB
+14/11/2013 12:23:34 - Folder Name Case
+14/11/2013 12:23:34 - Folder Name is: 
+14/11/2013 12:23:34 - /Users/erensezener/Documents/MATLAB/3-Quarters
+14/11/2013 12:23:45 - BaseDir is: 
+14/11/2013 12:23:45 - /Users/erensezener/Documents/MATLAB/3-Quarters
+14/11/2013 12:23:45 - Folder Name Case
+14/11/2013 12:23:45 - Folder Name is: 
+14/11/2013 12:23:45 - /Users/erensezener/Documents/MATLAB/3-Quarters/Data
+14/11/2013 12:23:47 - BaseDir is: 
+14/11/2013 12:23:47 - /Users/erensezener/Documents/MATLAB/3-Quarters/Data
+14/11/2013 12:23:47 - Folder Name Case
+14/11/2013 12:23:47 - Folder Name is: 
+14/11/2013 12:23:47 - /Users/erensezener/Documents/MATLAB/3-Quarters/Data/3D
+14/11/2013 12:27:38 - ---------
+14/11/2013 12:27:38 - BaseDir is: 
+14/11/2013 12:27:38 - /Users/erensezener/Documents
+14/11/2013 12:27:38 - Empty Folder Name Case
+14/11/2013 12:27:40 - BaseDir is: 
+14/11/2013 12:27:40 - /Users/erensezener/Documents
+14/11/2013 12:27:40 - Folder Name Case
+14/11/2013 12:27:40 - Folder Name is: 
+14/11/2013 12:27:40 - /Users/erensezener/Documents/GrayDeer
+14/11/2013 12:27:43 - BaseDir is: 
+14/11/2013 12:27:43 - /Users/erensezener/Documents/GrayDeer
+14/11/2013 12:27:43 - Folder Name Case
+14/11/2013 12:27:43 - Folder Name is: 
+14/11/2013 12:27:43 - /Users/erensezener/Documents/GrayDeer/GrayDeer
+14/11/2013 12:27:45 - BaseDir is: 
+14/11/2013 12:27:45 - /Users/erensezener/Documents/GrayDeer/GrayDeer
+14/11/2013 12:27:45 - Folder Name Case
+14/11/2013 12:27:45 - Folder Name is: 
+14/11/2013 12:27:45 - /Users/erensezener/Documents/GrayDeer/GrayDeer/src
+14/11/2013 12:27:47 - BaseDir is: 
+14/11/2013 12:27:47 - /Users/erensezener/Documents/GrayDeer/GrayDeer/src
+14/11/2013 12:27:47 - Folder Name Case
+14/11/2013 12:27:47 - Folder Name is: 
+14/11/2013 12:27:47 - /Users/erensezener/Documents/GrayDeer/GrayDeer/src/gui
+14/11/2013 12:30:3 - ---------
+14/11/2013 12:30:3 - BaseDir is: 
+14/11/2013 12:30:3 - /Users/erensezener/Documents
+14/11/2013 12:30:3 - Empty Folder Name Case
+14/11/2013 12:30:4 - BaseDir is: 
+14/11/2013 12:30:4 - /Users/erensezener/Documents
+14/11/2013 12:30:4 - Folder Name Case
+14/11/2013 12:30:4 - Folder Name is: 
+14/11/2013 12:30:4 - /Users/erensezener/Documents/Anki
+14/11/2013 12:30:6 - BaseDir is: 
+14/11/2013 12:30:6 - /Users/erensezener/Documents/Anki
+14/11/2013 12:30:6 - Folder Name Case
+14/11/2013 12:30:6 - Folder Name is: 
+14/11/2013 12:30:6 - /Users/erensezener/Documents/Anki/addons
+14/11/2013 12:32:39 - ---------
+14/11/2013 12:32:39 - BaseDir is: 
+14/11/2013 12:32:39 - /Users/erensezener/Documents
+14/11/2013 12:32:39 - Empty Folder Name Case
+14/11/2013 12:34:5 - ---------
+14/11/2013 12:34:5 - BaseDir is: 
+14/11/2013 12:34:5 - /Users/erensezener/Documents
+14/11/2013 12:34:5 - Empty Folder Name Case
+14/11/2013 12:34:36 - ---------
+14/11/2013 12:34:36 - BaseDir is: 
+14/11/2013 12:34:36 - /Users/erensezener/Documents
+14/11/2013 12:34:36 - Empty Folder Name Case
+14/11/2013 12:34:38 - BaseDir is: 
+14/11/2013 12:34:38 - /Users/erensezener/Documents
+14/11/2013 12:34:38 - Folder Name Case
+14/11/2013 12:34:38 - Folder Name is: 
+14/11/2013 12:34:38 - /Users/erensezener/Documents/Anki
+14/11/2013 12:36:45 - ---------
+14/11/2013 12:36:45 - BaseDir is: 
+14/11/2013 12:36:45 - /Users/erensezener/Documents
+14/11/2013 12:36:45 - Empty Folder Name Case
+14/11/2013 12:36:47 - BaseDir is: 
+14/11/2013 12:36:47 - /Users/erensezener/Documents
+14/11/2013 12:36:47 - Folder Name Case
+14/11/2013 12:36:47 - Folder Name is: 
+14/11/2013 12:36:47 - /Users/erensezener/Documents/Development
+14/11/2013 12:36:52 - BaseDir is: 
+14/11/2013 12:36:52 - /Users/erensezener/Documents/Development
+14/11/2013 12:36:52 - Folder Name Case
+14/11/2013 12:36:52 - Folder Name is: 
+14/11/2013 12:36:52 - /Users/erensezener/Documents/Development/JBlas
+14/11/2013 12:36:54 - BaseDir is: 
+14/11/2013 12:36:54 - /Users/erensezener/Documents/Development/JBlas
+14/11/2013 12:36:54 - Folder Name Case
+14/11/2013 12:36:54 - Folder Name is: 
+14/11/2013 12:36:54 - /Users/erensezener/Documents/Development/JBlas/BUGS
+14/11/2013 12:36:57 - BaseDir is: 
+14/11/2013 12:36:57 - /Users/erensezener/Documents/Development/JBlas/BUGS
+14/11/2013 12:36:57 - Folder Name Case
+14/11/2013 12:36:57 - Folder Name is: 
+14/11/2013 12:36:57 - /Users/erensezener/Documents/Development/JBlas/BUGS/COPYING
+14/11/2013 12:41:37 - ---------
+14/11/2013 12:41:37 - BaseDir is: 
+14/11/2013 12:41:37 - /Users/erensezener/Documents
+14/11/2013 12:41:37 - Empty Folder Name Case
+14/11/2013 12:41:38 - BaseDir is: 
+14/11/2013 12:41:38 - /Users/erensezener/Documents
+14/11/2013 12:41:38 - Folder Name Case
+14/11/2013 12:41:38 - Folder Name is: 
+14/11/2013 12:41:38 - /Users/erensezener/Documents/Ari Research Docs
+14/11/2013 12:41:40 - BaseDir is: 
+14/11/2013 12:41:40 - /Users/erensezener/Documents/Ari Research Docs
+14/11/2013 12:41:40 - Folder Name Case
+14/11/2013 12:41:40 - Folder Name is: 
+14/11/2013 12:41:40 - /Users/erensezener/Documents/Ari Research Docs/MultiCache

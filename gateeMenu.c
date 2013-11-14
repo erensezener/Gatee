@@ -8,7 +8,6 @@ char newFolderName[300];
 char baseDir[300];
 
 int main() {
-	
 	strcpy(baseDir, "/Users/erensezener/Documents");
 	
 	logToFileAt("---------", "/Users/erensezener/Gatee");
@@ -24,7 +23,6 @@ int main() {
     initItems("", baseDir);
     // initItems();
 	
-
     /* Create menu */
     initMenu();
 
@@ -67,29 +65,16 @@ void initItems(char *folderName, char *baseDir) {
 	logToFileAt("BaseDir is: ", "/Users/erensezener/Gatee");
 	logToFileAt(baseDir, "/Users/erensezener/Gatee");
 	
-	//logToFileAt("In init items", "/Users/erensezener/Gatee");
-// void initItems() {
-	// char *folderName = "";
 	if (strcmp(folderName, "") == 0){
 		logToFileAt("Empty Folder Name Case", "/Users/erensezener/Gatee");
     	changeDirectoryTo(baseDir);
-		//logToFileAt("changeDirectoryTo(baseDir);", "/Users/erensezener/Gatee");
+
 	}else{
 		logToFileAt("Folder Name Case", "/Users/erensezener/Gatee");
-		//char *newFolderName[200] ;
-// 		
-// 		if((newFolderName = malloc(strlen(baseDir)+strlen(folderName)+1)) != NULL){
-// 		    newFolderName[0] = '\0';   // ensures the memory is an empty string
-// 		    strcat(baseDir,folderName);
-// 		    strcat(baseDir,folderName);
-		strcpy(newFolderName, baseDir);
-		//logToFileAt("strcpy(newFolderName, baseDir);", "/Users/erensezener/Gatee");
-		
+
+		strcpy(newFolderName, baseDir);		
 		strcat(newFolderName, "/");
-		//logToFileAt("strcat(newFolderName,);", "/Users/erensezener/Gatee");
-		
 		strcat(newFolderName, folderName);
-		//logToFileAt("strcat(newFolderName, folderName);", "/Users/erensezener/Gatee");
 		
 		changeDirectoryTo(newFolderName);
 		strcpy(baseDir,newFolderName);
@@ -97,16 +82,10 @@ void initItems(char *folderName, char *baseDir) {
 		logToFileAt("Folder Name is: ", "/Users/erensezener/Gatee");
 		logToFileAt(newFolderName, "/Users/erensezener/Gatee");
 		
-		
-		
-		//} 
-		
 	}
-	//logToFileAt("After if-else", "/Users/erensezener/Gatee");
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
-	//logToFileAt("getDirectoryContentNames", "/Users/erensezener/Gatee");
 
     numListItems = dirItemCount;
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
@@ -116,10 +95,7 @@ void initItems(char *folderName, char *baseDir) {
         /* Set the user pointer */
         set_item_userptr(listItems[i], printCurrentDirectory);
     }
-	//logToFileAt("for", "/Users/erensezener/Gatee");
-	
     listItems[numListItems] = (ITEM *)NULL;
-	//logToFileAt("End of init items", "/Users/erensezener/Gatee");
 }
 
 void initMenu() {
@@ -151,35 +127,17 @@ void enterKeyPressed() {
     void (*p)(char *);
 
     currentSelectedItem = current_item(menu);
-	//logToFileAt("currentSelectedItem = current_item(menu);", "/Users/erensezener/Gatee");
 	
-    p = item_userptr(currentSelectedItem);
-	//logToFileAt("p = item_userptr(currentSelectedItem);", "/Users/erensezener/Gatee");
-	
+    p = item_userptr(currentSelectedItem);	
     p((char *)item_name(currentSelectedItem));
-	//logToFileAt("p((char *)item_name(currentSelectedItem));", "/Users/erensezener/Gatee");
-	
     printSelectedItemName(item_name(currentSelectedItem));
-	//logToFileAt("printSelectedItemName(item_name(currentSelectedItem));", "/Users/erensezener/Gatee");
-	
-
     pos_menu_cursor(menu);
-	//logToFileAt("pos_menu_cursor(menu);", "/Users/erensezener/Gatee");
 	
-
-    // set_menu_items(menu, listItems);
     initItems(item_name(currentSelectedItem), baseDir);
-	//logToFileAt("initItems("");", "/Users/erensezener/Gatee");
-	
     initMenu();
-	//logToFileAt("initMenu();", "/Users/erensezener/Gatee");
-	
     post_menu(menu);
-	//logToFileAt("post_menu(menu);", "/Users/erensezener/Gatee");
-	
-    refresh();
-	//logToFileAt("refresh();", "/Users/erensezener/Gatee");
-	
+    refresh();	
+
 }
 
 //Duplicate of leftKeyPressed
@@ -195,12 +153,6 @@ void printSelectedItemName(const char *name) {
     move(lineNumberToPrintAt, 0);
     clrtoeol();
     mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
-	
-	// initItems();
-    // initItems(name);
-    // initMenu();
-    // post_menu(menu);
-    // refresh();
 	
 
     /* TEST */
