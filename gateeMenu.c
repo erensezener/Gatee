@@ -4,25 +4,38 @@ ITEM **listItems;
 int inputChar;
 MENU *menu;
 int numListItems;
+char newFolderName[300];
+char baseDir[300];
+char logDir[100];
 
 int main() {
-
+	/* Logs are created in this directory */
+	strcpy(logDir,"/Users/erensezener/Gatee");
+	
+	/* Navigation starts from this directory*/
+	strcpy(baseDir, "/Users/erensezener/Documents");
+	
+	logToFileAt("---------", logDir);
+	
     /* Initialize curses */
     initscr();
     start_color();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+	
+	// 2nd and 3rd param are # of rows and # of columns respectively
+	set_menu_format(menu, 40,1); 
 
     /* Initialize items */
-    initItems();
-
+    initItems("", baseDir);
+	
     /* Create menu */
     initMenu();
 
     /* Post the menu */
-    mvprintw(LINES - 3, 0, "Press <ENTER> to see the option selected");
-    mvprintw(LINES - 2, 0, "Up and Down arrow keys to naviage (F1 to Exit)");
+    //mvprintw(LINES - 3, 0, "Press <ENTER> to see the option selected");
+    //mvprintw(LINES - 2, 0, "Up and Down arrow keys to naviage (F1 to Exit)");
     post_menu(menu);
     refresh();
 
@@ -44,6 +57,9 @@ int main() {
             case ' ':
                 spaceKeyPressed();
                 break;
+			// case KEY_DC:
+			// 	backspaceKeyPressed();
+			// 	break;
             default:
                 keyPressed(inputChar);
                 break;
@@ -52,9 +68,28 @@ int main() {
     destructor();
 }
 
-void initItems() {
-    changeDirectoryTo("/Users/aemreunal/Documents");
+void initItems(char *folderName, char *baseDir) {
+	logToFileAt("BaseDir is: ", logDir);
+	logToFileAt(baseDir, logDir);
+	
+	if (strcmp(folderName, "") == 0){
+		logToFileAt("Empty Folder Name Case", logDir);
+    	changeDirectoryTo(baseDir);
 
+	}else{
+		logToFileAt("Folder Name Case", logDir);
+
+		strcpy(newFolderName, baseDir);		
+		strcat(newFolderName, "/");
+		strcat(newFolderName, folderName);
+		
+		changeDirectoryTo(newFolderName);
+		strcpy(baseDir,newFolderName);
+		
+		logToFileAt("Folder Name is: ", logDir);
+		logToFileAt(newFolderName, logDir);
+		
+	}
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
@@ -99,48 +134,25 @@ void enterKeyPressed() {
     void (*p)(char *);
 
     currentSelectedItem = current_item(menu);
-    p = item_userptr(currentSelectedItem);
+	
+    p = item_userptr(currentSelectedItem);	
     p((char *)item_name(currentSelectedItem));
-    printSelectedItemName(item_name(currentSelectedItem));
-
+    //printSelectedItemName(item_name(currentSelectedItem));
     pos_menu_cursor(menu);
+	
+	clear();
+    initItems(item_name(currentSelectedItem), baseDir);
+    initMenu();
+    post_menu(menu);
+    refresh();	
 
-    // set_menu_items(menu, listItems);
-    // initItems();
-    // initMenu();
-    // post_menu(menu);
-    // refresh();
 }
 
+//Duplicate of leftKeyPressed
+// void backspaceKeyPressed() { 
+//     menu_driver(menu, REQ_BACK_PATTERN);
+// }
 
-//Not in use
-//Prints the selected item
-void printSelectedItemName(char *name) {
-    int lineNumberToPrintAt = 26;
-    move(lineNumberToPrintAt, 0);
-    clrtoeol();
-    mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
-
-    /* TEST */
-    // lineNumberToPrintAt += 1;
-    // changeDirectoryTo("/Users/aemreunal/Documents");
-    // move(lineNumberToPrintAt, 0);
-    // clrtoeol();
-    // mvprintw(lineNumberToPrintAt, 0, "Current working directory is : %s", getWorkingDirectory());
-
-    // lineNumberToPrintAt += 1;
-
-    // int dirItemCount;
-    // char * * dirContents;
-    // getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
-
-    // for (i = 0; i < dirItemCount; ++i) {
-    //     move(lineNumberToPrintAt + i, 0);
-    //     clrtoeol();
-    //     mvprintw((lineNumberToPrintAt + i), 0, "%s", dirContents[i]);
-    // }
-    /* TEST */
-}
 
 //Prints the current directory
 void printCurrentDirectory() {
