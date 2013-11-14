@@ -23,7 +23,7 @@ void spaceKeyPressed();
 
 void keyPressed(int inputChar);
 
-void initItems(const char *folderName);
+void initItems(char *folderName, char*baseDir);
 // void initItems();
 
 void initMenu();

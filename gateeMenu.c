@@ -4,9 +4,14 @@ ITEM **listItems;
 int inputChar;
 MENU *menu;
 int numListItems;
+char newFolderName[300];
+char baseDir[300];
 
 int main() {
-	logToFile("---------");
+	
+	strcpy(baseDir, "/Users/erensezener/Documents");
+	
+	logToFileAt("---------", "/Users/erensezener/Gatee");
 	
     /* Initialize curses */
     initscr();
@@ -16,7 +21,7 @@ int main() {
     keypad(stdscr, TRUE);
 
     /* Initialize items */
-    initItems("");
+    initItems("", baseDir);
     // initItems();
 	
 
@@ -58,36 +63,50 @@ int main() {
     destructor();
 }
 
-void initItems(const char *folderName) {
-	logToFile("In init items");
+void initItems(char *folderName, char *baseDir) {
+	logToFileAt("BaseDir is: ", "/Users/erensezener/Gatee");
+	logToFileAt(baseDir, "/Users/erensezener/Gatee");
+	
+	//logToFileAt("In init items", "/Users/erensezener/Gatee");
 // void initItems() {
 	// char *folderName = "";
-	char *baseDir = "/Users/erensezener/Documents";
 	if (strcmp(folderName, "") == 0){
-		logToFile("Empty Folder Name Case");
+		logToFileAt("Empty Folder Name Case", "/Users/erensezener/Gatee");
     	changeDirectoryTo(baseDir);
-		logToFile("changeDirectoryTo(baseDir);");
+		//logToFileAt("changeDirectoryTo(baseDir);", "/Users/erensezener/Gatee");
 	}else{
-		logToFile("Folder Name Case");
-		char *newFolderName ;
+		logToFileAt("Folder Name Case", "/Users/erensezener/Gatee");
+		//char *newFolderName[200] ;
 // 		
 // 		if((newFolderName = malloc(strlen(baseDir)+strlen(folderName)+1)) != NULL){
 // 		    newFolderName[0] = '\0';   // ensures the memory is an empty string
 // 		    strcat(baseDir,folderName);
 // 		    strcat(baseDir,folderName);
 		strcpy(newFolderName, baseDir);
+		//logToFileAt("strcpy(newFolderName, baseDir);", "/Users/erensezener/Gatee");
+		
 		strcat(newFolderName, "/");
+		//logToFileAt("strcat(newFolderName,);", "/Users/erensezener/Gatee");
+		
 		strcat(newFolderName, folderName);
+		//logToFileAt("strcat(newFolderName, folderName);", "/Users/erensezener/Gatee");
+		
 		changeDirectoryTo(newFolderName);
+		strcpy(baseDir,newFolderName);
+		
+		logToFileAt("Folder Name is: ", "/Users/erensezener/Gatee");
+		logToFileAt(newFolderName, "/Users/erensezener/Gatee");
+		
+		
 		
 		//} 
 		
 	}
-	logToFile("After if-else");
+	//logToFileAt("After if-else", "/Users/erensezener/Gatee");
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
-	logToFile("getDirectoryContentNames");
+	//logToFileAt("getDirectoryContentNames", "/Users/erensezener/Gatee");
 
     numListItems = dirItemCount;
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
@@ -97,10 +116,10 @@ void initItems(const char *folderName) {
         /* Set the user pointer */
         set_item_userptr(listItems[i], printCurrentDirectory);
     }
-	logToFile("for");
+	//logToFileAt("for", "/Users/erensezener/Gatee");
 	
     listItems[numListItems] = (ITEM *)NULL;
-	logToFile("End of init items");
+	//logToFileAt("End of init items", "/Users/erensezener/Gatee");
 }
 
 void initMenu() {
@@ -132,34 +151,34 @@ void enterKeyPressed() {
     void (*p)(char *);
 
     currentSelectedItem = current_item(menu);
-	logToFile("currentSelectedItem = current_item(menu);");
+	//logToFileAt("currentSelectedItem = current_item(menu);", "/Users/erensezener/Gatee");
 	
     p = item_userptr(currentSelectedItem);
-	logToFile("p = item_userptr(currentSelectedItem);");
+	//logToFileAt("p = item_userptr(currentSelectedItem);", "/Users/erensezener/Gatee");
 	
     p((char *)item_name(currentSelectedItem));
-	logToFile("p((char *)item_name(currentSelectedItem));");
+	//logToFileAt("p((char *)item_name(currentSelectedItem));", "/Users/erensezener/Gatee");
 	
     printSelectedItemName(item_name(currentSelectedItem));
-	logToFile("printSelectedItemName(item_name(currentSelectedItem));");
+	//logToFileAt("printSelectedItemName(item_name(currentSelectedItem));", "/Users/erensezener/Gatee");
 	
 
     pos_menu_cursor(menu);
-	logToFile("pos_menu_cursor(menu);");
+	//logToFileAt("pos_menu_cursor(menu);", "/Users/erensezener/Gatee");
 	
 
     // set_menu_items(menu, listItems);
-    initItems("");
-	logToFile("initItems("");");
+    initItems(item_name(currentSelectedItem), baseDir);
+	//logToFileAt("initItems("");", "/Users/erensezener/Gatee");
 	
     initMenu();
-	logToFile("initMenu();");
+	//logToFileAt("initMenu();", "/Users/erensezener/Gatee");
 	
     post_menu(menu);
-	logToFile("post_menu(menu);");
+	//logToFileAt("post_menu(menu);", "/Users/erensezener/Gatee");
 	
     refresh();
-	logToFile("refresh();");
+	//logToFileAt("refresh();", "/Users/erensezener/Gatee");
 	
 }
 
@@ -178,10 +197,10 @@ void printSelectedItemName(const char *name) {
     mvprintw(lineNumberToPrintAt, 0, "Item selected is : %s", name);
 	
 	// initItems();
-    initItems(name);
-    initMenu();
-    post_menu(menu);
-    refresh();
+    // initItems(name);
+    // initMenu();
+    // post_menu(menu);
+    // refresh();
 	
 
     /* TEST */
