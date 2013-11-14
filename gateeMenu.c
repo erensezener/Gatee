@@ -6,7 +6,8 @@ MENU *menu;
 int numListItems;
 
 int main() {
-
+	logToFile("---------");
+	
     /* Initialize curses */
     initscr();
     start_color();
@@ -58,12 +59,16 @@ int main() {
 }
 
 void initItems(const char *folderName) {
+	logToFile("In init items");
 // void initItems() {
 	// char *folderName = "";
 	char *baseDir = "/Users/erensezener/Documents";
-	if (strcmp(folderName, "") == 0)
+	if (strcmp(folderName, "") == 0){
+		logToFile("Empty Folder Name Case");
     	changeDirectoryTo(baseDir);
-	else{
+		logToFile("changeDirectoryTo(baseDir);");
+	}else{
+		logToFile("Folder Name Case");
 		char *newFolderName ;
 // 		
 // 		if((newFolderName = malloc(strlen(baseDir)+strlen(folderName)+1)) != NULL){
@@ -78,9 +83,11 @@ void initItems(const char *folderName) {
 		//} 
 		
 	}
+	logToFile("After if-else");
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
+	logToFile("getDirectoryContentNames");
 
     numListItems = dirItemCount;
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
@@ -90,7 +97,10 @@ void initItems(const char *folderName) {
         /* Set the user pointer */
         set_item_userptr(listItems[i], printCurrentDirectory);
     }
+	logToFile("for");
+	
     listItems[numListItems] = (ITEM *)NULL;
+	logToFile("End of init items");
 }
 
 void initMenu() {
@@ -122,17 +132,35 @@ void enterKeyPressed() {
     void (*p)(char *);
 
     currentSelectedItem = current_item(menu);
+	logToFile("currentSelectedItem = current_item(menu);");
+	
     p = item_userptr(currentSelectedItem);
+	logToFile("p = item_userptr(currentSelectedItem);");
+	
     p((char *)item_name(currentSelectedItem));
+	logToFile("p((char *)item_name(currentSelectedItem));");
+	
     printSelectedItemName(item_name(currentSelectedItem));
+	logToFile("printSelectedItemName(item_name(currentSelectedItem));");
+	
 
     pos_menu_cursor(menu);
+	logToFile("pos_menu_cursor(menu);");
+	
 
     // set_menu_items(menu, listItems);
     initItems("");
+	logToFile("initItems("");");
+	
     initMenu();
+	logToFile("initMenu();");
+	
     post_menu(menu);
+	logToFile("post_menu(menu);");
+	
     refresh();
+	logToFile("refresh();");
+	
 }
 
 //Duplicate of leftKeyPressed
