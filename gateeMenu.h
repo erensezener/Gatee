@@ -24,11 +24,8 @@ void spaceKeyPressed();
 void keyPressed(int inputChar);
 
 void initItems(char *folderName, char*baseDir);
-// void initItems();
 
 void initMenu();
-
-void printSelectedItemName(const char *name);
 
 void println(char *string, int lineNumberToPrintAt);
 
