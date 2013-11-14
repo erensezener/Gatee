@@ -6,11 +6,16 @@ MENU *menu;
 int numListItems;
 char newFolderName[300];
 char baseDir[300];
+char logDir[100];
 
 int main() {
+	/* Logs are created in this directory */
+	strcpy(logDir,"/Users/erensezener/Gatee");
+	
+	/* Navigation starts from this directory*/
 	strcpy(baseDir, "/Users/erensezener/Documents");
 	
-	logToFileAt("---------", "/Users/erensezener/Gatee");
+	logToFileAt("---------", logDir);
 	
     /* Initialize curses */
     initscr();
@@ -62,15 +67,15 @@ int main() {
 }
 
 void initItems(char *folderName, char *baseDir) {
-	logToFileAt("BaseDir is: ", "/Users/erensezener/Gatee");
-	logToFileAt(baseDir, "/Users/erensezener/Gatee");
+	logToFileAt("BaseDir is: ", logDir);
+	logToFileAt(baseDir, logDir);
 	
 	if (strcmp(folderName, "") == 0){
-		logToFileAt("Empty Folder Name Case", "/Users/erensezener/Gatee");
+		logToFileAt("Empty Folder Name Case", logDir);
     	changeDirectoryTo(baseDir);
 
 	}else{
-		logToFileAt("Folder Name Case", "/Users/erensezener/Gatee");
+		logToFileAt("Folder Name Case", logDir);
 
 		strcpy(newFolderName, baseDir);		
 		strcat(newFolderName, "/");
@@ -79,8 +84,8 @@ void initItems(char *folderName, char *baseDir) {
 		changeDirectoryTo(newFolderName);
 		strcpy(baseDir,newFolderName);
 		
-		logToFileAt("Folder Name is: ", "/Users/erensezener/Gatee");
-		logToFileAt(newFolderName, "/Users/erensezener/Gatee");
+		logToFileAt("Folder Name is: ", logDir);
+		logToFileAt(newFolderName, logDir);
 		
 	}
     int dirItemCount;
