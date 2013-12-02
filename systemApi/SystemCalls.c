@@ -120,28 +120,6 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
  */
 
 void logToFile(char * stringToLog) {
-
-    // ----------IMPORTANT, DON'T DELETE-----------
-    // char *bp;
-    // size_t size;
-    // FILE *stream;
-
-    // stream = open_memstream (&bp, &size);
-
-    // fprintf (stream, "hello");
-    // fflush (stream);
-
-    // printf ("buf = `%s', size = %d\n", bp, size);
-
-    // fprintf (stream, ", world");
-    // fflush (stream);
-    // fclose (stream);
-
-    // printf ("buf = `%s', size = %d\n", bp, size);
-
-    // free(stream);
-    // ----------IMPORTANT, DON'T DELETE-----------
-
     FILE *file = fopen(LOG_FILE_NAME, "a+");
 
     time_t rawTime;
@@ -154,22 +132,6 @@ void logToFile(char * stringToLog) {
         fprintf(file, "%d/%d/%d %d:%d:%d - %s\n", currTime->tm_mday, (currTime->tm_mon + 1), (currTime->tm_year + 1900), currTime->tm_hour, currTime->tm_min, currTime->tm_sec, stringToLog);
         fclose(file);
     }
-
-    // ----------IMPORTANT, DON'T DELETE-----------
-    // /* print some text */
-    // const char *text = "Write this to the file";
-    // fprintf(file, "Some text: %s\n", text);
-
-    // /* print integers and floats */
-    // int i = 1;
-    // float py = 3.1415927;
-    // fprintf(file, "Integer: %d, float: %f\n", i, py);
-
-    // /* printing single chatacters */
-    // char c = 'A';
-    // fprintf(file, "A character: %c\n", c);
-    // ----------IMPORTANT, DON'T DELETE-----------
-
 }
 
 /*
