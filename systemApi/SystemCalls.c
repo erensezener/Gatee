@@ -82,6 +82,9 @@ struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
  * for (int i = 0; i < dirItemCount; ++i) {
  *     printf("%s\n", dirContents[i]);
  * }
+ *
+ * Disclaimer: Omitting the current directory pointer and renaming the parent
+ * directory pointer to PARENT_DIR_NAME defined in SystemCalls.h.
  */
 
 void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * dirContentNames) {
@@ -89,16 +92,16 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
     *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
 
     if (*dirItemCount >= 0) {
-        *dirContentNames = malloc((int)dirItemCount * sizeof(char * *));
+        *dirContentNames = malloc(((int)dirItemCount - 1) * sizeof(char * *));
 		for (i = 0; i < *dirItemCount; ++i) {
             if(strcmp(directoryContents[i]->d_name, ".") == 0) {
                 /* Don't include the current directory pointer */
             } else if(strcmp(directoryContents[i]->d_name, "..") == 0) {
-                (*dirContentNames)[i] = malloc(strlen(PARENT_DIR_NAME) * sizeof(char *));
-                strcpy((*dirContentNames)[i], PARENT_DIR_NAME);
+                (*dirContentNames)[i - 1] = malloc(strlen(PARENT_DIR_NAME) * sizeof(char *));
+                strcpy((*dirContentNames)[i - 1], PARENT_DIR_NAME);
             } else {
-                (*dirContentNames)[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
-                strcpy((*dirContentNames)[i], directoryContents[i]->d_name);
+                (*dirContentNames)[i - 1] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+                strcpy((*dirContentNames)[i - 1], directoryContents[i]->d_name);
             }
         }
         *dirItemCount = *dirItemCount - 1; /* To remove the current directory pointer count */

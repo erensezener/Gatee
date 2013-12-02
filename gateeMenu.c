@@ -10,26 +10,26 @@ char logDir[100];
 
 int main() {
 	/* Logs are created in this directory */
-	strcpy(logDir,"/Users/erensezener/Gatee");
-	
+	strcpy(logDir,"/");
+
 	/* Navigation starts from this directory*/
-	strcpy(baseDir, "/Users/erensezener/Documents");
-	
+	strcpy(baseDir, "/");
+
 	logToFileAt("---------", logDir);
-	
+
     /* Initialize curses */
     initscr();
     start_color();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-	
+
 	// 2nd and 3rd param are # of rows and # of columns respectively
-	set_menu_format(menu, 40,1); 
+	set_menu_format(menu, 40,1);
 
     /* Initialize items */
     initItems("", baseDir);
-	
+
     /* Create menu */
     initMenu();
 
@@ -71,7 +71,7 @@ int main() {
 void initItems(char *folderName, char *baseDir) {
 	logToFileAt("BaseDir is: ", logDir);
 	logToFileAt(baseDir, logDir);
-	
+
 	if (strcmp(folderName, "") == 0){
 		logToFileAt("Empty Folder Name Case", logDir);
     	changeDirectoryTo(baseDir);
@@ -79,16 +79,16 @@ void initItems(char *folderName, char *baseDir) {
 	}else{
 		logToFileAt("Folder Name Case", logDir);
 
-		strcpy(newFolderName, baseDir);		
+		strcpy(newFolderName, baseDir);
 		strcat(newFolderName, "/");
 		strcat(newFolderName, folderName);
-		
+
 		changeDirectoryTo(newFolderName);
 		strcpy(baseDir,newFolderName);
-		
+
 		logToFileAt("Folder Name is: ", logDir);
 		logToFileAt(newFolderName, logDir);
-		
+
 	}
     int dirItemCount;
     char * * dirContents;
@@ -134,22 +134,22 @@ void enterKeyPressed() {
     void (*p)(char *);
 
     currentSelectedItem = current_item(menu);
-	
-    p = item_userptr(currentSelectedItem);	
+
+    p = item_userptr(currentSelectedItem);
     p((char *)item_name(currentSelectedItem));
     //printSelectedItemName(item_name(currentSelectedItem));
     pos_menu_cursor(menu);
-	
+
 	clear();
     initItems(item_name(currentSelectedItem), baseDir);
     initMenu();
     post_menu(menu);
-    refresh();	
+    refresh();
 
 }
 
 //Duplicate of leftKeyPressed
-// void backspaceKeyPressed() { 
+// void backspaceKeyPressed() {
 //     menu_driver(menu, REQ_BACK_PATTERN);
 // }
 
