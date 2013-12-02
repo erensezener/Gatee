@@ -91,9 +91,17 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
     if (*dirItemCount >= 0) {
         *dirContentNames = malloc((int)dirItemCount * sizeof(char * *));
 		for (i = 0; i < *dirItemCount; ++i) {
-            (*dirContentNames)[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
-            strcpy((*dirContentNames)[i], directoryContents[i]->d_name);
+            if(strcmp(directoryContents[i]->d_name, ".") == 0) {
+                /* Don't include the current directory pointer */
+            } else if(strcmp(directoryContents[i]->d_name, "..") == 0) {
+                (*dirContentNames)[i] = malloc(strlen(PARENT_DIR_NAME) * sizeof(char *));
+                strcpy((*dirContentNames)[i], PARENT_DIR_NAME);
+            } else {
+                (*dirContentNames)[i] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
+                strcpy((*dirContentNames)[i], directoryContents[i]->d_name);
+            }
         }
+        *dirItemCount = *dirItemCount - 1; /* To remove the current directory pointer count */
     } else {
         perror("Couldn't open the directory");
     }

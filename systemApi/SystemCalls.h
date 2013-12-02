@@ -15,6 +15,8 @@
 #define WRITE W_OK
 #define EXECUTE X_OK
 
+#define PARENT_DIR_NAME "< Parent Directory"
+
 int i;
 
 char * getWorkingDirectory();
