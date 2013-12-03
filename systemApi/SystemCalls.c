@@ -164,7 +164,7 @@ int canAccessTo(char * filePath, int accessType) {
 }
 
 void prepareToExit() {
-    FILE *file = fopen(CD_FILE_NAME, "w");
+    FILE *file = fopen(CD_FILE_NAME, "w+");
 
     if (file == NULL) {
         printf("Error opening file, unable to log!\n");
