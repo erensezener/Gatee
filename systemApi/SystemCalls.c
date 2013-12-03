@@ -1,22 +1,8 @@
 #include "SystemCalls.h"
 
-/*
- * Usage:
- *
- * char *currentWorkingDirectory = getWorkingDirectory();
- *
- * printf("%s\n", currentWorkingDirectory);
- */
-
 char * getWorkingDirectory() {
     return getcwd(NULL, 0);
 }
-
-/*
- * Usage:
- *
- * changeDirectoryTo("/Users/--something--/Documents");
- */
 
 void changeDirectoryTo(char * directoryPath) {
     int status = chdir(directoryPath);
@@ -48,17 +34,6 @@ int one (const struct dirent *unused) {
     return 1;
 }
 
-/*
- * Usage:
- *
- * int dirItemCount;
- * struct dirent * * directoryContents = getDirectoryContents(getWorkingDirectory(), &dirItemCount);
- *
- * for (int i = 0; i < dirItemCount; ++i) {
- *     printf("%s\n", directoryContents[i]->d_name);
- * }
- */
-
 struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
     struct dirent * * directoryContents;
     *dirItemCount = scandir (directory, &directoryContents, one, alphasort);
@@ -71,21 +46,6 @@ struct dirent * * getDirectoryContents(char * directory, int * dirItemCount) {
         return NULL;
     }
 }
-
-/*
- * Usage:
- *
- * int dirItemCount;
- * char * * dirContents;
- * getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
- *
- * for (int i = 0; i < dirItemCount; ++i) {
- *     printf("%s\n", dirContents[i]);
- * }
- *
- * Disclaimer: Omitting the current directory pointer and renaming the parent
- * directory pointer to PARENT_DIR_NAME defined in SystemCalls.h.
- */
 
 void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * dirContentNames) {
     struct dirent * * directoryContents;
@@ -100,8 +60,14 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
                 (*dirContentNames)[i - 1] = malloc(strlen(PARENT_DIR_NAME) * sizeof(char *));
                 strcpy((*dirContentNames)[i - 1], PARENT_DIR_NAME);
             } else {
-                (*dirContentNames)[i - 1] = malloc(strlen(directoryContents[i]->d_name) * sizeof(char *));
-                strcpy((*dirContentNames)[i - 1], directoryContents[i]->d_name);
+                (*dirContentNames)[i - 1] = malloc((strlen(directoryContents[i]->d_name) + PREFIX_SIZE) * sizeof(char *));
+                if(fileOrDir(directoryContents[i]->d_name) == DIR_ID) {
+                    strcpy((*dirContentNames)[i - 1], DIR_PREFIX);
+                    strcat((*dirContentNames)[i - 1], directoryContents[i]->d_name);
+                } else {
+                    strcpy((*dirContentNames)[i - 1], FILE_PREFIX);
+                    strcat((*dirContentNames)[i - 1], directoryContents[i]->d_name);
+                }
             }
         }
         *dirItemCount = *dirItemCount - 1; /* To remove the current directory pointer count */
@@ -110,14 +76,17 @@ void getDirectoryContentNames(char * directory, int * dirItemCount, char * * * d
     }
 }
 
-/*
- * Usage:
- *
- * logToFile(--some string--);
- *
- * Creates the log at the current working directory.
- * More info: http://www.cprogramming.com/tutorial/cfileio.html
- */
+int fileOrDir(char * name) {
+    struct stat status;
+    lstat(name, &status);
+    if(S_ISDIR(status.st_mode)) {
+        // It's a directory
+        return 0;
+    } else {
+        // It's a file
+        return 1;
+    }
+}
 
 void logToFile(char * stringToLog) {
     FILE *file = fopen(LOG_FILE_NAME, "a+");
@@ -134,24 +103,12 @@ void logToFile(char * stringToLog) {
     }
 }
 
-/*
- * Usage:
- *
- * logToFileAt(--some string--, "/bin/logs");
- */
-
 void logToFileAt(char * stringToLog, char * logFilePath) {
     char * currentDir = getWorkingDirectory();
     changeDirectoryTo(logFilePath);
     logToFile(stringToLog);
     changeDirectoryTo(currentDir);
 }
-
-/*
- * Usage:
- *
- * logToFileAtRoot(--some string--);
- */
 
 void logToFileAtRoot(char * stringToLog) {
     if(canWriteTo("/") == 0) {
@@ -162,45 +119,17 @@ void logToFileAtRoot(char * stringToLog) {
     }
 }
 
-/*
- * Usage:
- *
- * canRead("/bin/logs") == 0;
- * canRead("/bin/logs/log.txt") == 0;
- */
-
 int canRead(char * filePath) {
     return canAccessTo(filePath, READ);
 }
-
-/*
- * Usage:
- *
- * canWriteTo("/") == 0;
- * canWriteTo("/log.txt") == 0;
- */
 
 int canWriteTo(char * filePath) {
     return canAccessTo(filePath, WRITE);
 }
 
-/*
- * Usage:
- *
- * canExecute("/bin/gatee");
- */
-
 int canExecute(char * filePath) {
     return canAccessTo(filePath, EXECUTE);
 }
-
-/*
- * Usage:
- *
- * canAccessTo("/bin/logs/log.txt", READ);
- * canAccessTo("/bin/logs/log.txt", WRITE);
- * canAccessTo("/bin/gatee", EXECUTE);
- */
 
 int canAccessTo(char * filePath, int accessType) {
     int status = access(filePath, accessType);
