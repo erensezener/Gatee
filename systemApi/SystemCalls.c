@@ -162,3 +162,14 @@ int canAccessTo(char * filePath, int accessType) {
         return -99;
     }
 }
+
+void prepareToExit() {
+    FILE *file = fopen(CD_FILE_NAME, "w");
+
+    if (file == NULL) {
+        printf("Error opening file, unable to log!\n");
+    } else {
+        fprintf(file, "%s", getWorkingDirectory());
+        fclose(file);
+    }
+}

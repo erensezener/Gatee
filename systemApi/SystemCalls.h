@@ -12,7 +12,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#define LOG_FILE_NAME "log.txt"
+#define LOG_FILE_NAME ".gatee_log"
+#define CD_FILE_NAME ".gatee_cd"
 #define READ R_OK
 #define WRITE W_OK
 #define EXECUTE X_OK
@@ -139,5 +140,12 @@ int canExecute(char * filePath);
  * canAccessTo("/bin/gatee", EXECUTE);
  */
 int canAccessTo(char * filePath, int accessType);
+
+/*
+ * Usage:
+ *
+ * prepareToExit();
+ */
+void prepareToExit();
 
 #endif
