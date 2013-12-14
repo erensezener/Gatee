@@ -79,9 +79,25 @@ void initItems(char *folderName, char *baseDir) {
 	}else{
 		logToFileAt("Folder Name Case", logDir);
 
-		strcpy(newFolderName, baseDir);
-		strcat(newFolderName, "/");
-		strcat(newFolderName, folderName);
+        if(folderName[0] == '>' && folderName[1] == ' '){ // Directory case            
+    		strcpy(newFolderName, baseDir);
+    		strcat(newFolderName, "/");
+            folderName = folderName + 2; //Ignore first 2 charactes: "> "
+            strcat(newFolderName, folderName);
+
+            logToFileAt("newFolderName is: ", logDir);
+            logToFileAt(newFolderName, logDir);
+        }else if(folderName[0] == ' ' && folderName[1] == ' '){// File case
+            // TODO open file here
+            
+            
+        }else if(folderName[0] == '<' && folderName[1] == ' '){ //Parent directory case
+    		strcpy(newFolderName, baseDir);
+    		strcat(newFolderName, "/..");
+        }else {
+        	logToFileAt("Wrong Prefix! File is: ", logDir);
+            logToFileAt(folderName, logDir);
+        }
 
 		changeDirectoryTo(newFolderName);
 		strcpy(baseDir,newFolderName);
