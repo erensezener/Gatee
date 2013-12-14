@@ -1,17 +1,27 @@
 Gatee
 ========================
 
-Compilation commands:
+#####Compilation commands:
+Initially compile Gatee files by using the following command.
 
-make gatee
+```
+$ make gatee
+```
 
-make test
+If you change the source files, you can 'clean' the build related files with:
 
-make clean
+```
+$ make clean
+```
 
 #####Running Gatee:
 
-Use the following command to run Gatee 
-$ . runGatee
+Use the following command to run Gatee:
 
-Important: Press FN + F1 to exit
+```
+$ . runGatee
+```
+
+#####Exiting Gatee:
+
+Press FN + F1 to exit.
