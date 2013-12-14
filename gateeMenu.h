@@ -9,6 +9,10 @@
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 4
 
+char newFolderName[300];
+
+char logDir[100];
+
 int i;
 
 void enterKeyPressed();

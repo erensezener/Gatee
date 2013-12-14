@@ -4,9 +4,7 @@ ITEM **listItems;
 int inputChar;
 MENU *menu;
 int numListItems;
-char newFolderName[300];
 char baseDir[300];
-char logDir[100];
 
 int main() {
 	/* Logs are created in this directory */
@@ -179,6 +177,7 @@ void printCurrentDirectory() {
 }
 
 void destructor() {
+    prepareToExit();
     unpost_menu(menu);
 	for(i = 0; i < numListItems; ++i) {
         free_item(listItems[i]);

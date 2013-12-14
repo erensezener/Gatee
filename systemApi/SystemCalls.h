@@ -12,6 +12,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+#include "../gateeMenu.h"
+
 #define LOG_FILE_NAME ".gatee_log"
 #define CD_FILE_NAME ".gatee_cd"
 #define READ R_OK
