@@ -1,0 +1,4 @@
+sudo ./gatee
+cd /
+value=`cat .gatee_cd`
+cd "$value"
