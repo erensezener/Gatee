@@ -17,13 +17,13 @@ int main() {
 
     /* Initialize curses */
     initscr();
-    start_color();
+    //start_color();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
 
 	// 2nd and 3rd param are # of rows and # of columns respectively
-	set_menu_format(menu, 40,1);
+	set_menu_format(menu, 45,1);
 
     /* Initialize items */
     initItems("", baseDir);
