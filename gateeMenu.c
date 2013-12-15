@@ -22,8 +22,8 @@ int main() {
     noecho();
     keypad(stdscr, TRUE);
 
-	// 2nd and 3rd param are # of rows and # of columns respectively
-	set_menu_format(menu, 45,1);
+	// 2nd and 3rd param are # of rows wanted and # of columns wanted (for the list), respectively
+	set_menu_format(menu, getNumTerminalRows(), 1);
 
     /* Initialize items */
     initItems("", baseDir);
@@ -77,21 +77,21 @@ void initItems(char *folderName, char *baseDir) {
 	}else{
 		logToFileAt("Folder Name Case", logDir);
 
-        if(folderName[0] == '>' && folderName[1] == ' '){ // Directory case            
+        if(folderName[0] == '>' && folderName[1] == ' '){ // Directory case
     		strcpy(newFolderName, baseDir);
     		strcat(newFolderName, "/");
             folderName = folderName + 2; //Ignore first 2 charactes: "> "
             strcat(newFolderName, folderName);
-        
+
         }else if(folderName[0] == ' ' && folderName[1] == ' '){// File case
     		strcpy(newFolderName, baseDir);
     		strcat(newFolderName, "/");
             folderName = folderName + 2; //Ignore first 2 charactes: "> "
             strcat(newFolderName, folderName);
-            
+
             destructor();
             exit(0);
-            
+
         }else if(folderName[0] == '<' && folderName[1] == ' '){ //Parent directory case
     		strcpy(newFolderName, baseDir);
     		strcat(newFolderName, "/..");

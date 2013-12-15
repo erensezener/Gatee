@@ -6,7 +6,7 @@ FLAGS=-lmenu -lncurses
 
 gatee: $(OBJECTS)
 	$(CC) -o $(OUTPUT) $(OBJECTS) $(FLAGS) $(INCLUDES)
-	$(info Compiled & linked.)
+	@echo 'Run Gatee using ". runGatee"'
 
 gateeMenu.o: gateeMenu.c gateeMenu.h
 	$(CC) -c gateeMenu.c gateeMenu.h
