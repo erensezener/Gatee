@@ -163,10 +163,22 @@ int canAccessTo(char * filePath, int accessType) {
     }
 }
 
+int getNumTerminalRows() {
+    struct winsize window;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &window);
+    return window.ws_row;
+}
+
+int getNumTerminalColumns() {
+    struct winsize window;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &window);
+    return window.ws_col;
+}
+
 void prepareToExit() {
     changeDirectoryTo("/");
     FILE *file = fopen(CD_FILE_NAME, "w+");
-    
+
     if (file == NULL) {
         printf("Error opening file, unable to log!\n");
     } else {

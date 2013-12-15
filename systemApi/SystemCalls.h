@@ -11,6 +11,7 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 
 #include "../gateeMenu.h"
 
@@ -142,6 +143,22 @@ int canExecute(char * filePath);
  * canAccessTo("/bin/gatee", EXECUTE);
  */
 int canAccessTo(char * filePath, int accessType);
+
+/*
+ * Usage:
+ *
+ * getNumTerminalRows();
+ */
+
+int getNumTerminalRows();
+
+/*
+ * Usage:
+ *
+ * getNumTerminalColumns();
+ */
+
+int getNumTerminalColumns();
 
 /*
  * Usage:
