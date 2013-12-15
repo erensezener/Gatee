@@ -82,12 +82,13 @@ void initItems(char *folderName, char *baseDir) {
     		strcat(newFolderName, "/");
             folderName = folderName + 2; //Ignore first 2 charactes: "> "
             strcat(newFolderName, folderName);
-
-            logToFileAt("newFolderName is: ", logDir);
-            logToFileAt(newFolderName, logDir);
+        
         }else if(folderName[0] == ' ' && folderName[1] == ' '){// File case
-            // TODO open file here
-            
+    		strcpy(newFolderName, baseDir);
+    		strcat(newFolderName, "/");
+            folderName = folderName + 2; //Ignore first 2 charactes: "> "
+            strcat(newFolderName, folderName);
+            destructor();
             
         }else if(folderName[0] == '<' && folderName[1] == ' '){ //Parent directory case
     		strcpy(newFolderName, baseDir);
