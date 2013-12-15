@@ -1,6 +1,8 @@
 Gatee
 ========================
 
+Gatee is a simple terminal-based file explorer.
+
 #####Compilation commands:
 Initially compile Gatee files by using the following command.
 
@@ -21,6 +23,9 @@ Use the following command to run Gatee:
 ```
 $ . runGatee
 ```
+
+Use arrow buttons to naviage the files.
+Press Enter button to make the toggled item the current directory.
 
 #####Exiting Gatee:
 
