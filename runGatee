@@ -1,4 +1,17 @@
 sudo ./gatee
-cd /
-value=`cat .gatee_cd`
-cd "$value"
+
+while read -r line
+do    
+    if [[ -d $line ]]; then
+        cd "$line"
+        echo "Changed directory to $line";
+        break;
+    elif [[ -f $line ]]; then
+        nano "$line";
+        echo "Opened $line with nano";
+        break;
+    else
+        echo "ERROR.";
+        break;
+    fi
+done < "/.gatee_cd"

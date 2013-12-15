@@ -171,6 +171,7 @@ void prepareToExit() {
         printf("Error opening file, unable to log!\n");
     } else {
         fprintf(file, "%s", newFolderName);
+        fprintf(file, "\n", newFolderName); //A Hack for the bash script
         fclose(file);
     }
 }
