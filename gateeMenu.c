@@ -156,7 +156,8 @@ void enterKeyPressed() {
     pos_menu_cursor(menu);
 
 	clear();
-    initItems(item_name(currentSelectedItem), baseDir);
+    char *postfixDir = (char*) item_name(currentSelectedItem);
+    initItems(postfixDir, baseDir);
     initMenu();
     post_menu(menu);
     refresh();
