@@ -7,7 +7,7 @@ do
         echo "Changed directory to $line";
         break;
     elif [[ -f $line ]]; then
-        nano "$line";
+        nano "$line" < /dev/tty ;
         echo "Opened $line with nano";
         break;
     else
