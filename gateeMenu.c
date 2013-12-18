@@ -40,9 +40,9 @@ int main() {
             case KEY_LEFT:
                 leftKeyPressed();
                 break;
-            case KEY_SPACE:
-                spaceKeyPressed();
-                break;
+            // case KEY_SPACE:
+            //     spaceKeyPressed();
+            //     break;
 			// case KEY_DC:
 			//     backspaceKeyPressed();
 			// 	   break;
@@ -143,9 +143,9 @@ void leftKeyPressed() {
     menu_driver(menu, REQ_BACK_PATTERN);
 }
 
-void spaceKeyPressed() {
-    menu_driver(menu, REQ_NEXT_MATCH);
-}
+// void spaceKeyPressed() {
+//     menu_driver(menu, REQ_NEXT_MATCH);
+// }
 
 void enterKeyPressed() {
     ITEM *currentSelectedItem;
