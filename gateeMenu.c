@@ -2,7 +2,6 @@
 
 int main() {
     strcpy(baseDir, "/");
-    strcpy(logDir, "/");
 
     setlocale(LC_CTYPE, "");
 
@@ -17,7 +16,7 @@ int main() {
 	set_menu_format(menu, getNumTerminalRows() - 2, 1);
 
     /* Initialize items */
-    initItems("", baseDir);
+    initItems("");
 
     /* Create menu */
     initMenu();
@@ -55,7 +54,7 @@ int main() {
     destructor(baseDir);
 }
 
-void initItems(char * folderName, char * baseDir) {
+void initItems(char * folderName) {
 	if (strcmp(folderName, "") == 0){
 		logToFileAt("Empty Folder Name case, returning to base directory.", logDir);
     	changeDirectoryTo(baseDir);
@@ -86,7 +85,7 @@ void initItems(char * folderName, char * baseDir) {
                 break;
         }
 		changeDirectoryTo(newFolderName);
-		strcpy(baseDir,newFolderName);
+		strcpy(baseDir, newFolderName);
 	}
     printDirList();
     printCurrentDirectory();
@@ -161,7 +160,7 @@ void enterKeyPressed() {
 
 	clear();
     char *postfixDir = (char*) item_name(currentSelectedItem);
-    initItems(postfixDir, baseDir);
+    initItems(postfixDir);
     initMenu();
     post_menu(menu);
     refresh();
