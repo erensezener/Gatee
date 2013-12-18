@@ -23,7 +23,7 @@ ITEM * * listItems;
 int numListItems;
 
 char baseDir[1000];
-char newFolderName[300];
+char newFolderName[1000];
 
 int inputChar;
 int i;
@@ -47,11 +47,11 @@ void spaceKeyPressed();
 
 void keyPressed(int inputChar);
 
-void initItems(char *folderName, char*baseDir);
+void initItems(char * folderName);
 
 void initMenu();
 
-void println(char *string, int lineNumberToPrintAt);
+void println(char * string, int lineNumberToPrintAt);
 
 void destructor();
 

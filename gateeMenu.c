@@ -44,8 +44,8 @@ int main() {
                 spaceKeyPressed();
                 break;
 			// case KEY_DC:
-			// 	backspaceKeyPressed();
-			// 	break;
+			//     backspaceKeyPressed();
+			// 	   break;
             default:
                 keyPressed(inputChar);
                 break;
