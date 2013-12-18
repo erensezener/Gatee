@@ -4,6 +4,8 @@ int main() {
     strcpy(baseDir, "/");
     strcpy(logDir, "/");
 
+    setlocale(LC_CTYPE, "");
+
     /* Initialize curses */
     initscr();
     //start_color();
