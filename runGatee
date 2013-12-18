@@ -1,7 +1,5 @@
 sudo ./gatee
 
-open_file = false
-
 while read -r line
 do    
     if [[ -d $line ]]; then
@@ -11,14 +9,9 @@ do
     elif [[ -f $line ]]; then
         nano "$line" < /dev/tty ;
         echo "Opened $line with nano";
-        open_file = true;
         break;
     else
         echo "ERROR.";
         break;
     fi
 done < "/.gatee_cd"
-
-if $open_file; then
-    . runGatee
-fi

@@ -16,12 +16,13 @@
 #define DIR 1
 #define FILE 2
 
+char * logDir = "/";
+
 MENU * menu;
 ITEM * * listItems;
 int numListItems;
 
 char baseDir[1000];
-char logDir[1000];
 char newFolderName[300];
 
 int inputChar;
