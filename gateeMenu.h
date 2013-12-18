@@ -8,12 +8,30 @@
 
 #define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
 #define CTRLD 4
+#define KEY_SPACE ' '
+#define KEY_ENTER_NCURSES 10
 
+#define PAR_DIR 0
+#define DIR 1
+#define FILE 2
+
+MENU * menu;
+ITEM * * listItems;
+int numListItems;
+
+char baseDir[1000];
+char logDir[1000];
 char newFolderName[300];
 
-char logDir[100];
-
+int inputChar;
 int i;
+
+// TEST
+// char * buffer;
+// buffer = malloc((strlen(newFolderName) + 5) * sizeof(char));
+// memset(buffer, '\0', (strlen(newFolderName) + 5));
+// snprintf(buffer, (strlen(newFolderName) + 5), "nano %s", newFolderName);
+// TEST
 
 void enterKeyPressed();
 
@@ -36,5 +54,9 @@ void println(char *string, int lineNumberToPrintAt);
 void destructor();
 
 void printCurrentDirectory();
+
+void printDirList();
+
+int getType(char * folderName);
 
 #endif

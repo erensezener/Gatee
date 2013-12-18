@@ -1,19 +1,8 @@
 #include "gateeMenu.h"
 
-ITEM **listItems;
-int inputChar;
-MENU *menu;
-int numListItems;
-char baseDir[300];
-
 int main() {
-	/* Logs are created in this directory */
-	strcpy(logDir,"/");
-
-	/* Navigation starts from this directory*/
-	strcpy(baseDir, "/");
-
-	logToFileAt("---------", logDir);
+    strcpy(baseDir, "/");
+    strcpy(logDir, "/");
 
     /* Initialize curses */
     initscr();
@@ -23,7 +12,7 @@ int main() {
     keypad(stdscr, TRUE);
 
 	// 2nd and 3rd param are # of rows wanted and # of columns wanted (for the list), respectively
-	set_menu_format(menu, getNumTerminalRows(), 1);
+	set_menu_format(menu, getNumTerminalRows() - 2, 1);
 
     /* Initialize items */
     initItems("", baseDir);
@@ -32,8 +21,6 @@ int main() {
     initMenu();
 
     /* Post the menu */
-    //mvprintw(LINES - 3, 0, "Press <ENTER> to see the option selected");
-    //mvprintw(LINES - 2, 0, "Up and Down arrow keys to naviage (F1 to Exit)");
     post_menu(menu);
     refresh();
 
@@ -46,13 +33,13 @@ int main() {
             case KEY_UP:
                 upKeyPressed();
                 break;
-            case 10: /* Enter */
+            case KEY_ENTER_NCURSES:
                 enterKeyPressed();
                 break;
             case KEY_LEFT:
                 leftKeyPressed();
                 break;
-            case ' ':
+            case KEY_SPACE:
                 spaceKeyPressed();
                 break;
 			// case KEY_DC:
@@ -63,57 +50,70 @@ int main() {
                 break;
         }
     }
-    destructor();
+    destructor(baseDir);
 }
 
-void initItems(char *folderName, char *baseDir) {
-	logToFileAt("BaseDir is: ", logDir);
-	logToFileAt(baseDir, logDir);
-
+void initItems(char * folderName, char * baseDir) {
 	if (strcmp(folderName, "") == 0){
-		logToFileAt("Empty Folder Name Case", logDir);
+		logToFileAt("Empty Folder Name case, returning to base directory.", logDir);
     	changeDirectoryTo(baseDir);
+	} else {
+        switch (getType(folderName)) {
+            case PAR_DIR:
+                strcpy(newFolderName, baseDir);
+                strcat(newFolderName, "/..");
+                break;
+            case DIR:
+                strcpy(newFolderName, baseDir);
+                strcat(newFolderName, "/");
+                folderName = folderName + 2; //Ignore first 2 charactes: "> "
+                strcat(newFolderName, folderName);
+                break;
+            case FILE:
+                strcpy(newFolderName, baseDir);
+                strcat(newFolderName, "/");
+                folderName = folderName + 2; //Ignore first 2 charactes: "  "
+                strcat(newFolderName, folderName);
 
-	}else{
-		logToFileAt("Folder Name Case", logDir);
-
-        if(folderName[0] == '>' && folderName[1] == ' '){ // Directory case
-    		strcpy(newFolderName, baseDir);
-    		strcat(newFolderName, "/");
-            folderName = folderName + 2; //Ignore first 2 charactes: "> "
-            strcat(newFolderName, folderName);
-
-        }else if(folderName[0] == ' ' && folderName[1] == ' '){// File case
-    		strcpy(newFolderName, baseDir);
-    		strcat(newFolderName, "/");
-            folderName = folderName + 2; //Ignore first 2 charactes: "> "
-            strcat(newFolderName, folderName);
-
-            destructor();
-            exit(0);
-
-        }else if(folderName[0] == '<' && folderName[1] == ' '){ //Parent directory case
-    		strcpy(newFolderName, baseDir);
-    		strcat(newFolderName, "/..");
-        }else {
-        	logToFileAt("Wrong Prefix! File is: ", logDir);
-            logToFileAt(folderName, logDir);
+                destructor(newFolderName);
+                exit(0);
+                break;
+            default:
+                logToFileAt("Wrong Prefix! File is: ", logDir);
+                logToFileAt(folderName, logDir);
+                break;
         }
-
 		changeDirectoryTo(newFolderName);
 		strcpy(baseDir,newFolderName);
-
-		logToFileAt("Folder Name is: ", logDir);
-		logToFileAt(newFolderName, logDir);
-
 	}
+    printDirList();
+    printCurrentDirectory();
+}
+
+int getType(char * folderName) {
+    if (folderName[0] == '>' && folderName[1] == ' ') {
+        /* Directory case */
+        return DIR;
+    } else if (folderName[0] == ' ' && folderName[1] == ' ') {
+        /* File case */
+        return FILE;
+    } else if (folderName[0] == '<' && folderName[1] == ' ') {
+        /* Parent directory case */
+        return PAR_DIR;
+    } else {
+        return -1;
+    }
+
+}
+
+void printDirList() {
     int dirItemCount;
     char * * dirContents;
     getDirectoryContentNames(getWorkingDirectory(), &dirItemCount, &dirContents);
 
     numListItems = dirItemCount;
     listItems = (ITEM **)calloc(numListItems + 1, sizeof(ITEM *));
-	int i;
+    int i;
     for (i = 0; i < numListItems; ++i) {
         listItems[i] = new_item(dirContents[i], "");
         /* Set the user pointer */
@@ -172,26 +172,26 @@ void enterKeyPressed() {
 // }
 
 
-//Prints the current directory
-void printCurrentDirectory() {
-    int lineNumberToPrintAt = LINES - 5;
-    move(lineNumberToPrintAt, 0);
-    clrtoeol();
-    mvprintw(lineNumberToPrintAt, 0, "Your current directory is %s", getWorkingDirectory());
-}
-
-void destructor() {
-    prepareToExit();
-    unpost_menu(menu);
-	for(i = 0; i < numListItems; ++i) {
-        free_item(listItems[i]);
-    }
-    free_menu(menu);
-    endwin();
-}
-
 void println(char *string, int lineNumberToPrintAt) {
     move(lineNumberToPrintAt, 0);
     clrtoeol();
     mvprintw(lineNumberToPrintAt, 0, "%s", string);
+}
+
+//Prints the current directory
+void printCurrentDirectory() {
+    int lineNumberToPrintAt = LINES - 1;
+    move(lineNumberToPrintAt, 0);
+    clrtoeol();
+    mvprintw(lineNumberToPrintAt, 0, "Working dir: %s", getWorkingDirectory());
+}
+
+void destructor(char * dirToExit) {
+    prepareToExit(dirToExit);
+    unpost_menu(menu);
+    for(i = 0; i < numListItems; ++i) {
+        free_item(listItems[i]);
+    }
+    free_menu(menu);
+    endwin();
 }

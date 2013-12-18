@@ -175,15 +175,14 @@ int getNumTerminalColumns() {
     return window.ws_col;
 }
 
-void prepareToExit() {
+void prepareToExit(char * dirToExit) {
     changeDirectoryTo("/");
     FILE *file = fopen(CD_FILE_NAME, "w+");
 
     if (file == NULL) {
         printf("Error opening file, unable to log!\n");
     } else {
-        fprintf(file, "%s", newFolderName);
-        fprintf(file, "%s", "\n"); //A Hack for the bash script
+        fprintf(file, "%s\n", dirToExit);
         fclose(file);
     }
 }

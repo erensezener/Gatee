@@ -14,24 +14,24 @@ int main()
     }
     */
 
-    char *currentWorkingDirectory = getWorkingDirectory();
+ //    char *currentWorkingDirectory = getWorkingDirectory();
 
-    printf("%s\n", currentWorkingDirectory);
-	printf("End");
+ //    printf("%s\n", currentWorkingDirectory);
+	// printf("End");
 
     char *cd = "/Usersss";
+    // changeDirectoryTo(cd);
+
+    cd = "/Users/aemreunal/Documents/University/2013 - 2014/";
     changeDirectoryTo(cd);
 
-    cd = "/Users/aemreunal/Documents";
-    changeDirectoryTo(cd);
+    // currentWorkingDirectory = getWorkingDirectory();
 
-    currentWorkingDirectory = getWorkingDirectory();
-
-    printf("%s\n", currentWorkingDirectory);
+    // printf("%s\n", currentWorkingDirectory);
 
     int dirItemCount;
     char * * dirContents;
-    getDirectoryContentNames(currentWorkingDirectory, &dirItemCount, &dirContents);
+    getDirectoryContentNames(cd, &dirItemCount, &dirContents);
 
     printf("Number of items in the directory: %d\n", dirItemCount);
 	int i;
@@ -39,8 +39,8 @@ int main()
         printf("%s\n", dirContents[i]);
     }
 
-    changeDirectoryTo("/Users/aemreunal/Documents/GitHub Repositories/Gatee");
-    logToFile("Deneme 123");
+    // changeDirectoryTo("/Users/aemreunal/Documents/GitHub Repositories/Gatee");
+    // logToFile("Deneme 123");
 
     // logToFileAtRoot("hop");
 

@@ -13,8 +13,6 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 
-#include "../gateeMenu.h"
-
 #define LOG_FILE_NAME ".gatee_log"
 #define CD_FILE_NAME ".gatee_cd"
 #define READ R_OK
@@ -163,8 +161,8 @@ int getNumTerminalColumns();
 /*
  * Usage:
  *
- * prepareToExit();
+ * prepareToExit("/");
  */
-void prepareToExit();
+void prepareToExit(char * dirToExit);
 
 #endif
