@@ -22,17 +22,20 @@ MENU * menu;
 ITEM * * listItems;
 int numListItems;
 
-char baseDir[1000];
-char newFolderName[1000];
+char sourceDir[1000];
+char targetDir[1000];
 
+/* Temp variables */
 int inputChar;
+int type;
 int i;
+/* Temp variables */
 
 // TEST
 // char * buffer;
-// buffer = malloc((strlen(newFolderName) + 5) * sizeof(char));
-// memset(buffer, '\0', (strlen(newFolderName) + 5));
-// snprintf(buffer, (strlen(newFolderName) + 5), "nano %s", newFolderName);
+// buffer = malloc((strlen(targetDir) + 5) * sizeof(char));
+// memset(buffer, '\0', (strlen(targetDir) + 5));
+// snprintf(buffer, (strlen(targetDir) + 5), "nano %s", targetDir);
 // TEST
 
 void enterKeyPressed();
@@ -47,7 +50,7 @@ void spaceKeyPressed();
 
 void keyPressed(int inputChar);
 
-void initItems(char * folderName);
+void initItems(char * selectedFile);
 
 void initMenu();
 
@@ -59,6 +62,6 @@ void printCurrentDirectory();
 
 void printDirList();
 
-int getType(char * folderName);
+int getType(char * fileName);
 
 #endif

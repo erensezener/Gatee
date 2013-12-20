@@ -1,7 +1,7 @@
 #include "gateeMenu.h"
 
 int main() {
-    strcpy(baseDir, "/");
+    strcpy(sourceDir, "/");
 
     setlocale(LC_CTYPE, "");
 
@@ -51,54 +51,50 @@ int main() {
                 break;
         }
     }
-    destructor(baseDir);
+    destructor(sourceDir);
 }
 
-void initItems(char * folderName) {
-	if (strcmp(folderName, "") == 0){
+void initItems(char * selectedFile) {
+	if (strcmp(selectedFile, "") == 0){
 		logToFileAt("Empty Folder Name case, returning to base directory.", logDir);
-    	changeDirectoryTo(baseDir);
+    	changeDirectoryTo(sourceDir);
 	} else {
-        switch (getType(folderName)) {
+        switch (type = getType(selectedFile)) {
             case PAR_DIR:
-                strcpy(newFolderName, baseDir);
-                strcat(newFolderName, "/..");
+                strcpy(targetDir, sourceDir);
+                strcat(targetDir, "/..");
                 break;
             case DIR:
-                strcpy(newFolderName, baseDir);
-                strcat(newFolderName, "/");
-                folderName = folderName + 2; //Ignore first 2 charactes: "> "
-                strcat(newFolderName, folderName);
-                break;
             case FILE:
-                strcpy(newFolderName, baseDir);
-                strcat(newFolderName, "/");
-                folderName = folderName + 2; //Ignore first 2 charactes: "  "
-                strcat(newFolderName, folderName);
-
-                destructor(newFolderName);
-                exit(0);
+                strcpy(targetDir, sourceDir);
+                strcat(targetDir, "/");
+                /* +2 to ignore the first 2 charactes: "  " or "> " */
+                strcat(targetDir, (selectedFile + PREFIX_SIZE));
+                if (type == FILE) {
+                    destructor(targetDir);
+                    exit(0);
+                }
                 break;
             default:
                 logToFileAt("Wrong Prefix! File is: ", logDir);
-                logToFileAt(folderName, logDir);
+                logToFileAt(selectedFile, logDir);
                 break;
         }
-		changeDirectoryTo(newFolderName);
-		strcpy(baseDir, newFolderName);
+		changeDirectoryTo(targetDir);
+		strcpy(sourceDir, targetDir);
 	}
     printDirList();
     printCurrentDirectory();
 }
 
-int getType(char * folderName) {
-    if (folderName[0] == '>' && folderName[1] == ' ') {
+int getType(char * fileName) {
+    if (fileName[0] == '>' && fileName[1] == ' ') {
         /* Directory case */
         return DIR;
-    } else if (folderName[0] == ' ' && folderName[1] == ' ') {
+    } else if (fileName[0] == ' ' && fileName[1] == ' ') {
         /* File case */
         return FILE;
-    } else if (folderName[0] == '<' && folderName[1] == ' ') {
+    } else if (fileName[0] == '<' && fileName[1] == ' ') {
         /* Parent directory case */
         return PAR_DIR;
     } else {
@@ -155,7 +151,6 @@ void enterKeyPressed() {
 
     p = item_userptr(currentSelectedItem);
     p((char *)item_name(currentSelectedItem));
-    //printSelectedItemName(item_name(currentSelectedItem));
     pos_menu_cursor(menu);
 
 	clear();
@@ -167,7 +162,8 @@ void enterKeyPressed() {
 
 }
 
-//Duplicate of leftKeyPressed
+// Duplicate of leftKeyPressed
+//
 // void backspaceKeyPressed() {
 //     menu_driver(menu, REQ_BACK_PATTERN);
 // }
@@ -179,7 +175,6 @@ void println(char *string, int lineNumberToPrintAt) {
     mvprintw(lineNumberToPrintAt, 0, "%s", string);
 }
 
-//Prints the current directory
 void printCurrentDirectory() {
     int lineNumberToPrintAt = LINES - 1;
     move(lineNumberToPrintAt, 0);
