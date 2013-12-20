@@ -21,11 +21,11 @@
 
 #define PARENT_DIR_NAME "< Parent Directory"
 /* Possible prefixes: "< ", "> ", "  " */
-#define PREFIX_SIZE 2
+#define PREFIX_SIZE 1
 #define DIR_ID 0
-#define DIR_PREFIX "> "
+#define DIR_PREFIX ">"
 #define FILE_ID 1
-#define FILE_PREFIX "  "
+#define FILE_PREFIX " "
 
 int i;
 

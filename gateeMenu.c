@@ -68,7 +68,7 @@ void initItems(char * selectedFile) {
             case FILE:
                 strcpy(targetDir, sourceDir);
                 strcat(targetDir, "/");
-                /* +2 to ignore the first 2 charactes: "  " or "> " */
+                /* +2 to ignore the first character: " " or ">" */
                 strcat(targetDir, (selectedFile + PREFIX_SIZE));
                 if (type == FILE) {
                     destructor(targetDir);
@@ -88,13 +88,13 @@ void initItems(char * selectedFile) {
 }
 
 int getType(char * fileName) {
-    if (fileName[0] == '>' && fileName[1] == ' ') {
+    if (fileName[0] == '>') {
         /* Directory case */
         return DIR;
-    } else if (fileName[0] == ' ' && fileName[1] == ' ') {
+    } else if (fileName[0] == ' ') {
         /* File case */
         return FILE;
-    } else if (fileName[0] == '<' && fileName[1] == ' ') {
+    } else if (fileName[0] == '<') {
         /* Parent directory case */
         return PAR_DIR;
     } else {
@@ -139,9 +139,9 @@ void leftKeyPressed() {
     menu_driver(menu, REQ_BACK_PATTERN);
 }
 
-// void spaceKeyPressed() {
-//     menu_driver(menu, REQ_NEXT_MATCH);
-// }
+void spaceKeyPressed() {
+    menu_driver(menu, REQ_NEXT_MATCH);
+}
 
 void enterKeyPressed() {
     ITEM *currentSelectedItem;
