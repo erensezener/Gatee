@@ -21,3 +21,8 @@ do
         break;
     fi
 done < "/.gatee_cd"
+
+if $flag ; then
+    . ~/Gatee/runGatee
+fi
+
