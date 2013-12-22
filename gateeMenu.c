@@ -40,6 +40,9 @@ int main() {
             case KEY_LEFT:
                 leftKeyPressed();
                 break;
+            case KEY_RIGHT:
+                rightKeyPressed();
+                break;
             // case KEY_SPACE:
             //     spaceKeyPressed();
             //     break;
@@ -137,6 +140,10 @@ void upKeyPressed() {
 
 void leftKeyPressed() {
     menu_driver(menu, REQ_BACK_PATTERN);
+}
+
+void rightKeyPressed() {
+    menu_driver(menu, REQ_NEXT_MATCH);
 }
 
 void spaceKeyPressed() {

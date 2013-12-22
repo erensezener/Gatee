@@ -46,6 +46,8 @@ void upKeyPressed();
 
 void leftKeyPressed();
 
+void rightKeyPressed();
+
 void spaceKeyPressed();
 
 void keyPressed(int inputChar);
