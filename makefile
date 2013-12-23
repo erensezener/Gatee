@@ -6,7 +6,7 @@ FLAGS=-lmenu -lncurses
 
 gatee: $(OBJECTS)
 	$(CC) -o $(OUTPUT) $(OBJECTS) $(FLAGS) $(INCLUDES)
-	@echo 'Firrst type "export PATH=$$PATH:$$(pwd)"'
+	@echo 'First type "export PATH=$$PATH:$$(pwd)"'
 	@echo 'Then run Gatee using ". runGatee"'
 
 gateeMenu.o: gateeMenu.c gateeMenu.h
