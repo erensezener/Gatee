@@ -1,7 +1,7 @@
 #include "gateeMenu.h"
 
 int main() {
-    strcpy(sourceDir, "/");
+    strcpy(sourceDir, getWorkingDirectory());
 
     setlocale(LC_CTYPE, "");
 
